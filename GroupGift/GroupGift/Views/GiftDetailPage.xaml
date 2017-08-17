@@ -1,0 +1,95 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="GroupGift.Views.GiftDetailPage"
+             Title="{Binding Title}">
+
+    <ContentPage.ToolbarItems>
+        <ToolbarItem x:Name="tbiPlaceholder" Text="Save" />
+    </ContentPage.ToolbarItems>
+    
+    <ScrollView Orientation="Vertical" VerticalOptions="StartAndExpand">
+
+        <StackLayout Spacing="5" Padding="10">
+
+            <!-- main info -->
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Frame Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" BackgroundColor="{StaticResource PrimaryDark}" Padding="1" HorizontalOptions="FillAndExpand" VerticalOptions="Start">
+                    <Entry Text="{Binding Gift.Name}" Placeholder="Enter a Name for this Gift Event..." PlaceholderColor="#ccc" Style="{StaticResource TextDetailStyle}" BackgroundColor="#fff" VerticalOptions="Start" />
+                </Frame>
+                <Label Grid.Row="1" Grid.Column="0" Text="Date" Style="{StaticResource LabelDetailStyle}" />
+                <DatePicker Grid.Row="1" Grid.Column="1" x:Name="dpDate" Date="{Binding Gift.Date}" HorizontalOptions="FillAndExpand" />
+            </Grid>
+
+            <!-- Gift Detail -->
+            <Label Text="Gift(s)" Style="{StaticResource LabelDetailStyle}" />
+            <ListView x:Name="lvItems" ItemsSource="{Binding Gift.Items}" VerticalOptions="FillAndExpand" HasUnevenRows="True">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <Grid Padding="10" RowSpacing="1">
+                                <Label Grid.Column="0" Text="{Binding Name}" Style="{StaticResource LabelDetailStyle}" />
+                                <Label Grid.Column="1" Text="{Binding Price, StringFormat='{0:C2}'}" Style="{StaticResource LabelDetailStyle}" />
+                                <Button Grid.Column="2" Text="Delete" Clicked="btnGiftDelete_Clicked" Style="{StaticResource ButtonListView}" />
+                            </Grid>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+            <Button x:Name="btnAddGiftItem" Text="Add Gift" Clicked="btnAddGiftItem_Clicked" />
+            <!-- gift total -->
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Label Grid.Row="0" Grid.Column="0" Text="Total Price of Gift(s)" Style="{StaticResource LabelDetailStyle}" />
+                <Label Grid.Row="0" Grid.Column="1" Text="{Binding Gift.TotalGiftPrice, StringFormat='{0:C2}'}}" Style="{StaticResource LabelDetailTotalValueStyle}" />
+            </Grid>
+            
+            <!-- Donations -->
+            <Label Text="Donations" Style="{StaticResource LabelDetailStyle}" />
+            <ListView x:Name="lvDonations" ItemsSource="{Binding Gift.Donations}" VerticalOptions="FillAndExpand"
+                  HasUnevenRows="True" CachingStrategy="RecycleElement" ItemSelected="OnItemSelected">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <Grid Padding="10" RowSpacing="-1">
+                                <Label Grid.Column="0" Text="{Binding Name}" LineBreakMode="NoWrap" Style="{StaticResource LabelDetailStyle}" VerticalOptions="StartAndExpand" />
+                                <Label Grid.Column="1" Text="{Binding Amount, StringFormat='{0:C2}'}" LineBreakMode="NoWrap" Style="{StaticResource LabelDetailStyle}" VerticalOptions="StartAndExpand" />
+                                <Switch Grid.Column="2" IsToggled="{Binding IsReceived}" Toggled="swDonationReceived_Toggled" VerticalOptions="StartAndExpand" />
+                                <Button Grid.Column="3" Text="Delete" Clicked="btnDonationDelete_Clicked" Style="{StaticResource ButtonListView}" />
+                            </Grid>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+
+            <Button x:Name="btnAddDonation" Text="Add Donation" Clicked="btnAddDonation_Clicked" />
+
+            <!-- Totals -->
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Label Grid.Row="0" Grid.Column="0" Text="Total Donations Pledged" Style="{StaticResource LabelDetailStyle}" />
+                <Label Grid.Row="0" Grid.Column="1" Text="{Binding Gift.TotalDonations, StringFormat='{0:C2}'}}" Style="{StaticResource LabelDetailTotalValueStyle}" />
+
+                <Label Grid.Row="1" Grid.Column="0" Text="Total Donations Received" Style="{StaticResource LabelDetailStyle}" />
+                <Label Grid.Row="1" Grid.Column="1" Text="{Binding Gift.TotalDonationsReceived, StringFormat='{0:C2}'}}" Style="{StaticResource LabelDetailTotalValueStyle}" />
+
+                <Label Grid.Row="2" Grid.Column="0" Text="Donations Remaining" Style="{StaticResource LabelDetailStyle}" />
+                <Label Grid.Row="2" Grid.Column="1" Text="{Binding Gift.TotalRemainingAmt, StringFormat='{0:C2}'}}" Style="{StaticResource LabelDetailTotalValueStyle}" />
+
+                <Label Grid.Row="3" Grid.Column="0" Text="Donations Received Remaining" Style="{StaticResource LabelDetailStyle}" />
+                <Label Grid.Row="3" Grid.Column="1" Text="{Binding Gift.TotalRemainingReceivedAmt, StringFormat='{0:C2}'}" Style="{StaticResource LabelDetailTotalValueStyle}" XAlign="End" HorizontalTextAlignment="End" />
+            </Grid>
+
+        </StackLayout>
+    </ScrollView>
+</ContentPage>

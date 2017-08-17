@@ -1,0 +1,26 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="GroupGift.Popups.PopupGiftAdd">
+  <ContentView.Content>
+        <Frame WidthRequest="250" HeightRequest="300" BackgroundColor="#000" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" CornerRadius="5" Padding="1" HasShadow="True">
+            <Frame WidthRequest="250" HeightRequest="300" BackgroundColor="#fff" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" CornerRadius="5" Padding="2">
+
+                <StackLayout WidthRequest="250" HeightRequest="300" BackgroundColor="#fff" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Padding="20" Spacing="5">
+                    <Label Text="Item Name" Style="{StaticResource LabelCommon}" />
+                    <Entry x:Name="eNewGiftName" Style="{StaticResource EntryCommon}" />
+                    <Label Text="Price" Style="{StaticResource LabelCommon}" />
+                    <Entry x:Name="eNewGiftPrice" Style="{StaticResource EntryCommon}" />
+                    <Grid VerticalOptions="EndAndExpand">
+                        <Button Grid.Column="0" x:Name="btnNewGiftSave" Text="Save" Style="{StaticResource ButtonCommon}" />
+                        <Button Grid.Column="1" x:Name="btnNewGiftCancel" Text="Cancel" Style="{StaticResource ButtonCommon}" />
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="0.5*" />
+                            <ColumnDefinition Width="0.5*" />
+                        </Grid.ColumnDefinitions>
+                    </Grid>
+                </StackLayout>
+            </Frame>
+        </Frame>
+    </ContentView.Content>
+</ContentView>
