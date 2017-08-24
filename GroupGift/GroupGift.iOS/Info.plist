@@ -3,9 +3,9 @@
 <plist version="1.0">
 <dict>
 	<key>CFBundleDisplayName</key>
-	<string>GroupGift</string>
+	<string>GroupGift.iOS</string>
 	<key>CFBundleName</key>
-	<string>GroupGift</string>
+	<string>GroupGift.iOS</string>
 	<key>CFBundleIdentifier</key>
 	<string>com.companyname.GroupGift</string>
 	<key>CFBundleShortVersionString</key>
@@ -40,7 +40,5 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
-	<key>XSAppIconAssets</key>
-	<string>Assets.xcassets/AppIcon.appiconset</string>
 </dict>
 </plist>

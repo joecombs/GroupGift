@@ -1,19 +1,15 @@
 ﻿using System;
 using GroupGift.Helpers;
+using SQLite;
 
 namespace GroupGift.Models
 {
     public class BaseDataObject : ObservableObject
     {
-        public BaseDataObject()
-        {
-            Id = Guid.NewGuid().ToString();
-        }
+        public BaseDataObject() { }
 
-        /// <summary>
-        /// Id for item
-        /// </summary>
-        public string Id { get; set; }
+        [PrimaryKey, AutoIncrement]
+        public int Id { get; set; }
 
         /// <summary>
         /// Azure created at time stamp

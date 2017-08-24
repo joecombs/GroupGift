@@ -1,15 +1,35 @@
-﻿using System;
+﻿using GroupGift.Helpers;
+using System;
 
 namespace GroupGift.Models
 {
-    public class PersonDonation : BaseDataObject
+    public class PersonDonation : ObservableObject
     {
-        public long PersonId { get; set; }
+        private string _guid = "";
+        public string Guid
+        {
+            get { return _guid; }
+            set { SetProperty(ref _guid, value); }
+        }
 
         private string _name = "";
         public string Name {
             get { return _name; }
             set { SetProperty(ref _name, value); }
+        }
+
+        private string _email = "";
+        public string Email
+        {
+            get { return _email; }
+            set { SetProperty(ref _email, value); }
+        }
+
+        private string _phone = "";
+        public string Phone
+        {
+            get { return _phone; }
+            set { SetProperty(ref _phone, value); }
         }
 
         private double _amount = 0;
@@ -19,19 +39,11 @@ namespace GroupGift.Models
         }
 
         private bool _isReceived = false;
-        public bool IsReceived {
+        public bool IsReceived
+        {
             get { return _isReceived; }
-            set {
-                SetProperty(ref _isReceived, value);
-                IsReceivedDesc = IsReceived ? "Yes" : "No";
-            }
+            set { SetProperty(ref _isReceived, value); }
         }
 
-        private string _isReceivedDesc = "";
-        public string IsReceivedDesc
-        {
-            get { return _isReceivedDesc; }
-            set { SetProperty(ref _isReceivedDesc, value); }
-        }
     }
 }

@@ -1,14 +1,20 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 <resources>
-	<style name="MyTheme" parent="MyTheme.Base">
 
+  <color name="ListViewSelected">#e4f2d3</color>
+  <color name="ListViewHighlighted">#e4f2d3</color>
+  <color name="PrimaryColor">#3c7560</color>
+  <color name="PrimaryDarkColor">#1e392a</color>
+  <color name="AccentColor">#1e392a</color>
+
+  <style name="MyTheme" parent="MyTheme.Base">
     <item name="android:colorPressedHighlight">@color/ListViewSelected</item>
     <item name="android:colorLongPressedHighlight">@color/ListViewHighlighted</item>
     <item name="android:colorFocusedHighlight">@color/ListViewSelected</item>
     <item name="android:colorActivatedHighlight">@color/ListViewSelected</item>
-    <item name="android:activatedBackgroundIndicator">@color/ListViewSelected</item>    
-  
+    <item name="android:activatedBackgroundIndicator">@color/ListViewSelected</item>
   </style>
+  
 	<!-- Base theme applied no matter what API -->
 	<style name="MyTheme.Base" parent="Theme.AppCompat.Light.DarkActionBar">
 		<!--If you are using revision 22.1 please use just windowNoTitle. Without android:-->
@@ -17,22 +23,30 @@
 		<item name="windowActionBar">false</item>
 		<!-- Set theme colors from http://www.google.com/design/spec/style/color.html#color-color-palette-->
 		<!-- colorPrimary is used for the default action bar background -->
-		<item name="colorPrimary">#2196F3</item>
+		<item name="colorPrimary">@color/PrimaryColor</item>
 		<!-- colorPrimaryDark is used for the status bar -->
-		<item name="colorPrimaryDark">#1976D2</item>
+		<item name="colorPrimaryDark">@color/PrimaryDarkColor</item>
 		<!-- colorAccent is used as the default value for colorControlActivated
          which is used to tint widgets -->
-		<item name="colorAccent">#90CAF9</item>
+		<item name="colorAccent">@color/PrimaryColor</item>
 		<!-- You can also set colorControlNormal, colorControlActivated
          colorControlHighlight and colorSwitchThumbNormal. -->
 		<item name="windowActionModeOverlay">true</item>
 		<item name="android:datePickerDialogTheme">@style/AppCompatDialogStyle</item>
 	</style>
-	<style name="AppCompatDialogStyle" parent="Theme.AppCompat.Light.Dialog">
-		<item name="colorAccent">#90CAF9</item>
+
+  <style name="AppCompatDialogStyle" parent="Theme.AppCompat.Light.Dialog">
+		<item name="colorAccent">@color/PrimaryColor</item>
 	</style>
 
-  <color name="ListViewSelected">#1976D2</color>
-  <color name="ListViewHighlighted">#1976D2</color>
-  
+  <style name="Toolbar_Theme" parent="Base.ThemeOverlay.AppCompat.ActionBar">
+    <item name="android:textColorPrimary">#fff</item>
+    <item name="android:colorBackground">@color/PrimaryColor</item>
+  </style>
+
+  <style name="Toolbar_Popup" parent="Base.ThemeOverlay.AppCompat.ActionBar">
+    <item name="android:textColorPrimary">#fff</item>
+    <item name="android:colorBackground">@color/PrimaryColor</item>
+  </style>
+
 </resources>

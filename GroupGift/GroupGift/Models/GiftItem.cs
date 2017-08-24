@@ -1,7 +1,16 @@
-﻿namespace GroupGift.Models
+﻿using GroupGift.Helpers;
+
+namespace GroupGift.Models
 {
-    public class GiftItem : BaseDataObject
+    public class GiftItem : ObservableObject
     {
+        private string _guid = "";
+        public string Guid
+        {
+            get { return _guid; }
+            set { SetProperty(ref _guid, value); }
+        }
+
         private string _name = "";
         public string Name
         {

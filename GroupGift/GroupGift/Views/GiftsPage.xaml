@@ -1,0 +1,43 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="GroupGift.Views.GiftsPage"
+             Title="{Binding Title}"
+             xmlns:converter="clr-namespace:GroupGift.Helpers.Converters;assembly=GroupGift">
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <converter:BooleanToTextConverter x:Key="BooleanToTextConverter" />
+            <converter:DateToDayString x:Key="DateToDayString" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+        <ContentPage.ToolbarItems>
+            <ToolbarItem Text="Add Gift...   " Clicked="AddGift_Clicked" />
+        </ContentPage.ToolbarItems>
+
+    <ContentPage.Content>
+        <StackLayout Padding="10" Spacing="5">
+
+            <ListView x:Name="lvGifts" ItemsSource="{Binding Gifts}" VerticalOptions="FillAndExpand"
+                              HasUnevenRows="True" RefreshCommand="{Binding LoadGiftsCommand}" IsPullToRefreshEnabled="False"
+                              CachingStrategy="RecycleElement" ItemSelected="lvGifts_ItemSelected">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <StackLayout Padding="10" Spacing="5">
+                                <Label Text="{Binding Name}" Style="{StaticResource LabelCommon}" FontSize="Medium" FontAttributes="Bold" />
+                                <Label Text="{Binding Date, Converter={StaticResource DateToDayString}, StringFormat='Due: {0}'}" Style="{StaticResource LabelCommon}" />
+                                <StackLayout Orientation="Horizontal" Spacing="0">
+                                    <Label Text="{Binding IsFunded, Converter={StaticResource BooleanToTextConverter}, StringFormat='Funded? {0}'}" Style="{StaticResource LabelCommon}" />
+                                    <Label Text="{Binding IsReceived, Converter={StaticResource BooleanToTextConverter}, StringFormat=' - Received? {0}'}" Style="{StaticResource LabelCommon}" />
+                                </StackLayout>
+                            </StackLayout>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </StackLayout>
+    </ContentPage.Content>
+
+</ContentPage>

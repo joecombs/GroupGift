@@ -1,8 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
-using System.Text;
 
 namespace GroupGift.Models
 {
@@ -20,30 +18,15 @@ namespace GroupGift.Models
             set
             {
                 SetProperty(ref _date, value);
-                DateDesc = _date.ToLongDateString();
             }
         }
 
-        private string _dateDesc;
-        public string DateDesc
-        {
-            get { return _dateDesc; }
-            set { SetProperty(ref _dateDesc, value); }
-        }
         private bool _isCompleted = false;
         public bool IsCompleted {
             get { return _isCompleted; }
             set {
                 SetProperty(ref _isCompleted, value);
-                IsCompletedDesc = _isCompleted ? "Yes" : "No";
             }
-        }
-
-        private string _isCompletedDesc = "";
-        public string IsCompletedDesc
-        {
-            get { return _isCompletedDesc; }
-            set { SetProperty(ref _isCompletedDesc, value); }
         }
 
         private bool _isFunded = false;
@@ -53,15 +36,7 @@ namespace GroupGift.Models
             set
             {
                 SetProperty(ref _isFunded, value);
-                IsFundedDesc = IsFunded ? "Yes" : "No";
             }
-        }
-
-        private string _isFundedDesc = "";
-        public string IsFundedDesc
-        {
-            get { return _isFundedDesc; }
-            set { SetProperty(ref _isFundedDesc, value); }
         }
 
         private bool _isArchived = false;
@@ -71,23 +46,21 @@ namespace GroupGift.Models
             set
             {
                 SetProperty(ref _isArchived, value);
-                IsArchivedDesc = IsArchived ? "Yes" : "No";
             }
         }
 
-        private string _isArchivedDesc = "";
-        public string IsArchivedDesc
+        private bool _isReceived = false;
+        public bool IsReceived
         {
-            get { return _isArchivedDesc; }
-            set { SetProperty(ref _isArchivedDesc, value); }
+            get { return _isReceived; }
+            set { SetProperty(ref _isReceived, value); }
         }
 
-        public ObservableCollection<GiftItem> Items { get; set; }
+        public string Items { get; set; }
 
-        public ObservableCollection<PersonDonation> Donations { get; set; }
+        public string Donations { get; set; }
 
         private double _totalGiftPrice = 0;
-
         public double TotalGiftPrice
         {
             get { return _totalGiftPrice; }
@@ -121,21 +94,11 @@ namespace GroupGift.Models
             set { SetProperty(ref _totalRemainingReceivedAmt, value); }
         }
 
-        public void CalculateTotals()
-        {
-            //calc gift totals
-            TotalGiftPrice = Items.Sum(g => g.Price);
-            //calc donation totals
-            TotalDonations = Donations.Sum(x => x.Amount);
-            TotalDonationsReceived = Donations.Where(x => x.IsReceived).Sum(y => y.Amount);
-            TotalRemainingAmt = TotalGiftPrice - TotalDonations;
-            TotalRemainingReceivedAmt = TotalGiftPrice - TotalDonationsReceived;
-        }
-
         public Gift()
         {
-            if (Items == null) { Items = new ObservableCollection<GiftItem>(); }
-            if (Donations == null ) { Donations = new ObservableCollection<PersonDonation>(); }
+            IsFunded = false;
+            IsCompleted = false;
+            IsArchived = false;
         }
 
     }

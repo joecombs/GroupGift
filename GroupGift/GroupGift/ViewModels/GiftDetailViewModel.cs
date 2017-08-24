@@ -1,28 +1,39 @@
 ﻿using GroupGift.Models;
-using System.ComponentModel;
-using System.Runtime.CompilerServices;
+using System;
+using System.Diagnostics;
 using Xamarin.Forms;
 
 namespace GroupGift.ViewModels
 {
-	public class GiftDetailViewModel : BaseViewModel
+    public class GiftDetailViewModel : BaseViewModel
 	{
-        private Gift _gift;
-        public Gift Gift
+        private GiftWrapper _gift;
+        public GiftWrapper Gift
         {
             get { return _gift; }
             set { SetProperty(ref _gift, value); }
         }
 
-        public GiftDetailViewModel(Gift gift = null)
+        public GiftDetailViewModel(GiftWrapper gift = null)
 		{
-            if (gift == null)
+            try
             {
-                gift = new Gift();
-            }
+                if (gift == null)
+                {
+                    //create new object and default to today's date
+                    gift = new GiftWrapper()
+                    {
+                        Date = DateTime.Parse(DateTime.Now.ToString("MM/dd/yyyy"))
+                    };
+                }
 
-			Title = gift.Name;
-			Gift = gift;
+                Title = gift.Name;
+                Gift = gift;
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex.Message);
+            }
 		}
 
         public Command<GiftItem> RemoveGiftItemCommand
@@ -31,7 +42,7 @@ namespace GroupGift.ViewModels
             {
                 return new Command<GiftItem>((giftitem) =>
                 {
-                    Gift.Items.Remove(giftitem);
+                    Gift.ItemsCollection.Remove(giftitem);
                     Gift.CalculateTotals();
                 });
             }
@@ -43,7 +54,7 @@ namespace GroupGift.ViewModels
             {
                 return new Command<PersonDonation>((donation) =>
                 {
-                    Gift.Donations.Remove(donation);
+                    Gift.DonationsCollection.Remove(donation);
                     Gift.CalculateTotals();
                 });
             }

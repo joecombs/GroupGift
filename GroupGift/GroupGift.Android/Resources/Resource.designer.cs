@@ -1091,6 +1091,9 @@ namespace GroupGift.Droid
 		public partial class Color
 		{
 			
+			// aapt resource value: 0x7f0b004c
+			public const int AccentColor = 2131427404;
+			
 			// aapt resource value: 0x7f0b0049
 			public const int ListViewHighlighted = 2131427401;
 			
@@ -1098,31 +1101,37 @@ namespace GroupGift.Droid
 			public const int ListViewSelected = 2131427400;
 			
 			// aapt resource value: 0x7f0b004a
-			public const int abc_background_cache_hint_selector_material_dark = 2131427402;
+			public const int PrimaryColor = 2131427402;
 			
 			// aapt resource value: 0x7f0b004b
-			public const int abc_background_cache_hint_selector_material_light = 2131427403;
+			public const int PrimaryDarkColor = 2131427403;
 			
-			// aapt resource value: 0x7f0b004c
-			public const int abc_color_highlight_material = 2131427404;
+			// aapt resource value: 0x7f0b004d
+			public const int abc_background_cache_hint_selector_material_dark = 2131427405;
+			
+			// aapt resource value: 0x7f0b004e
+			public const int abc_background_cache_hint_selector_material_light = 2131427406;
+			
+			// aapt resource value: 0x7f0b004f
+			public const int abc_color_highlight_material = 2131427407;
 			
 			// aapt resource value: 0x7f0b0004
 			public const int abc_input_method_navigation_guard = 2131427332;
 			
-			// aapt resource value: 0x7f0b004d
-			public const int abc_primary_text_disable_only_material_dark = 2131427405;
-			
-			// aapt resource value: 0x7f0b004e
-			public const int abc_primary_text_disable_only_material_light = 2131427406;
-			
-			// aapt resource value: 0x7f0b004f
-			public const int abc_primary_text_material_dark = 2131427407;
-			
 			// aapt resource value: 0x7f0b0050
-			public const int abc_primary_text_material_light = 2131427408;
+			public const int abc_primary_text_disable_only_material_dark = 2131427408;
 			
 			// aapt resource value: 0x7f0b0051
-			public const int abc_search_url_text = 2131427409;
+			public const int abc_primary_text_disable_only_material_light = 2131427409;
+			
+			// aapt resource value: 0x7f0b0052
+			public const int abc_primary_text_material_dark = 2131427410;
+			
+			// aapt resource value: 0x7f0b0053
+			public const int abc_primary_text_material_light = 2131427411;
+			
+			// aapt resource value: 0x7f0b0054
+			public const int abc_search_url_text = 2131427412;
 			
 			// aapt resource value: 0x7f0b0005
 			public const int abc_search_url_text_normal = 2131427333;
@@ -1133,11 +1142,11 @@ namespace GroupGift.Droid
 			// aapt resource value: 0x7f0b0007
 			public const int abc_search_url_text_selected = 2131427335;
 			
-			// aapt resource value: 0x7f0b0052
-			public const int abc_secondary_text_material_dark = 2131427410;
+			// aapt resource value: 0x7f0b0055
+			public const int abc_secondary_text_material_dark = 2131427413;
 			
-			// aapt resource value: 0x7f0b0053
-			public const int abc_secondary_text_material_light = 2131427411;
+			// aapt resource value: 0x7f0b0056
+			public const int abc_secondary_text_material_light = 2131427414;
 			
 			// aapt resource value: 0x7f0b0008
 			public const int accent_material_dark = 2131427336;
@@ -1337,11 +1346,11 @@ namespace GroupGift.Droid
 			// aapt resource value: 0x7f0b003b
 			public const int switch_thumb_disabled_material_light = 2131427387;
 			
-			// aapt resource value: 0x7f0b0054
-			public const int switch_thumb_material_dark = 2131427412;
+			// aapt resource value: 0x7f0b0057
+			public const int switch_thumb_material_dark = 2131427415;
 			
-			// aapt resource value: 0x7f0b0055
-			public const int switch_thumb_material_light = 2131427413;
+			// aapt resource value: 0x7f0b0058
+			public const int switch_thumb_material_light = 2131427416;
 			
 			// aapt resource value: 0x7f0b003c
 			public const int switch_thumb_normal_material_dark = 2131427388;
@@ -2240,6 +2249,9 @@ namespace GroupGift.Droid
 			// aapt resource value: 0x7f070059
 			public const int action_bar_container = 2131165273;
 			
+			// aapt resource value: 0x7f070099
+			public const int action_bar_main = 2131165337;
+			
 			// aapt resource value: 0x7f070055
 			public const int action_bar_root = 2131165269;
 			
@@ -2660,9 +2672,6 @@ namespace GroupGift.Droid
 			// aapt resource value: 0x7f070048
 			public const int title_template = 2131165256;
 			
-			// aapt resource value: 0x7f070099
-			public const int toolbar = 2131165337;
-			
 			// aapt resource value: 0x7f070032
 			public const int top = 2131165234;
 			
@@ -3005,6 +3014,9 @@ namespace GroupGift.Droid
 			
 			// aapt resource value: 0x7f080021
 			public const int abc_toolbar_collapse_description = 2131230753;
+			
+			// aapt resource value: 0x7f080026
+			public const int app_name = 2131230758;
 			
 			// aapt resource value: 0x7f080023
 			public const int appbar_scrolling_view_behavior = 2131230755;
@@ -3897,6 +3909,12 @@ namespace GroupGift.Droid
 			
 			// aapt resource value: 0x7f0a0112
 			public const int ThemeOverlay_AppCompat_Light = 2131362066;
+			
+			// aapt resource value: 0x7f0a0176
+			public const int Toolbar_Popup = 2131362166;
+			
+			// aapt resource value: 0x7f0a0175
+			public const int Toolbar_Theme = 2131362165;
 			
 			// aapt resource value: 0x7f0a0113
 			public const int Widget_AppCompat_ActionBar = 2131362067;

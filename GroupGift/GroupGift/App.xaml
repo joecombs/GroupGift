@@ -2,9 +2,9 @@
 <Application xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="GroupGift.App">
   <Application.Resources>
         <ResourceDictionary>
-            <Color x:Key="Primary">#2196F3</Color>
-            <Color x:Key="PrimaryDark">#1976D2</Color>
-            <Color x:Key="Accent">#96d1ff</Color>
+            <Color x:Key="Primary">#3c7560</Color>
+            <Color x:Key="PrimaryDark">#1e392a</Color>
+            <Color x:Key="Accent">#3c7560</Color>
             <Color x:Key="LightBackgroundColor">#FAFAFA</Color>
             <Color x:Key="DarkBackgroundColor">#C0C0C0</Color>
             <Color x:Key="MediumGrayTextColor">#4d4d4d</Color>
@@ -14,43 +14,54 @@
                 <Setter Property="BarBackgroundColor" Value="{StaticResource Primary}" />
                 <Setter Property="BarTextColor" Value="White" />
             </Style>
-            
+
+            <!-- label styles -->
             <Style x:Key="LabelCommon" TargetType="Label">
-                <Setter Property="FontSize" Value="12" />
+                <Setter Property="FontSize" Value="11" />
                 <Setter Property="TextColor" Value="#000" />
             </Style>
-            <Style x:Key="LabelDetailStyle" TargetType="Label">
-                <Setter Property="FontSize" Value="12" />
-                <Setter Property="TextColor" Value="#000" />
+            <Style x:Key="LabelDetailTotalLabel" TargetType="Label" BasedOn="{StaticResource LabelCommon}">
+                <Setter Property="FontSize" Value="14" />
+                <Setter Property="FontAttributes" Value="Bold" />
             </Style>
-            <Style x:Key="LabelDetailTotalValueStyle" TargetType="Label" BasedOn="{StaticResource LabelDetailStyle}">
+            <Style x:Key="LabelDetailTotalValue" TargetType="Label" BasedOn="{StaticResource LabelCommon}">
+                <Setter Property="FontSize" Value="14" />
                 <Setter Property="HorizontalOptions" Value="End" />
                 <Setter Property="FontAttributes" Value="Bold" />
-                <Setter Property="TextColor" Value="#1f9602" />
+                <Setter Property="TextColor" Value="#3c7560" />
             </Style>
-            <Style x:Key="LabelDetailDonationList" TargetType="Label" BasedOn="{StaticResource LabelDetailStyle}">
-                <Setter Property="FontSize" Value="11" />
+            <Style x:Key="LabelDetailDonationList" TargetType="Label" BasedOn="{StaticResource LabelCommon}">
+                <Setter Property="FontSize" Value="10" />
             </Style>
-            
-            <Style x:Key="EntryCommon" TargetType="Entry">
+            <Style x:Key="LabelHeader" TargetType="Label" BasedOn="{StaticResource LabelCommon}">
                 <Setter Property="FontSize" Value="12" />
+                <Setter Property="FontAttributes" Value="Bold" />
+                <Setter Property="Margin" Value="0,20" />
+                <Setter Property="TextColor" Value="#fff" />
+            </Style>
+
+            <!-- entry styles -->
+            <Style x:Key="EntryCommon" TargetType="Entry">
+                <Setter Property="FontSize" Value="11" />
                 <Setter Property="TextColor" Value="#000"/>
+                <Setter Property="PlaceholderColor" Value="#ccc" />
             </Style>
             <Style x:Key="TextDetailStyle" TargetType="Entry" BasedOn="{StaticResource EntryCommon}">
                 <Setter Property="HorizontalOptions" Value="FillAndExpand" />
             </Style>
-            
+
             <Style x:Key="ButtonCommon" TargetType="Button">
-                <Setter Property="BackgroundColor" Value="#1976d2" />
+                <Setter Property="BackgroundColor" Value="#1e392a" />
                 <Setter Property="TextColor" Value="#fff" />
-                <Setter Property="FontSize" Value="12" />
+                <Setter Property="FontSize" Value="11" />
             </Style>
-            <Style x:Key="ButtonListView" TargetType="Button">
-                <Setter Property="BackgroundColor" Value="#c8d4e0" />
-                <Setter Property="TextColor" Value="#000" />
+            <Style x:Key="ButtonListView" TargetType="Button" BasedOn="{StaticResource ButtonCommon}">
+                <Setter Property="BackgroundColor" Value="#1e392a" />
+                <Setter Property="TextColor" Value="#fff" />
                 <Setter Property="FontSize" Value="10" />
                 <Setter Property="HorizontalOptions" Value="End" />
             </Style>
+
         </ResourceDictionary>
     </Application.Resources>
 </Application>
