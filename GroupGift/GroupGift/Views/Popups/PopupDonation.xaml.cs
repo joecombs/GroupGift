@@ -21,11 +21,15 @@ namespace GroupGift.Views.Popups
         public PopupDonation()
         {
             Initialize();
+
+            lblDonationHeader.Text = "Enter a new Donation";
         }
 
         public PopupDonation(PersonDonation donation)
         {
             Initialize();
+            lblDonationHeader.Text = "Update Donation";
+
             DonationGuid = donation.Guid;
             newDonationName.Text = donation.Name;
             newDonationAmount.Text = donation.Amount.ToString();

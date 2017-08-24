@@ -18,11 +18,13 @@ namespace GroupGift.Views.Popups
         public PopupGiftItem()
         {
             Initialize();
+            lblGiftItemHeader.Text = "Enter a new Gift Item";
         }
 
         public PopupGiftItem(GiftItem giftitem)
         {
             Initialize();
+            lblGiftItemHeader.Text = "Update Gift Item";
 
             //set screen values
             GiftItemGuid = giftitem.Guid;

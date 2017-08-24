@@ -5,8 +5,8 @@
   <ContentView.Content>
         <Frame WidthRequest="300" HeightRequest="375" BackgroundColor="#000" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" CornerRadius="5" Padding="1" HasShadow="True">
             <Frame WidthRequest="300" HeightRequest="375" BackgroundColor="#fff" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" CornerRadius="5" Padding="2">
-                <StackLayout WidthRequest="300" HeightRequest="375" Padding="20,10" BackgroundColor="#fff" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Spacing="0">
-                    <Label Text="Enter a new Donation" Style="{StaticResource LabelCommon}" FontAttributes="Bold" FontSize="Medium" Margin="0,0,0,5" />
+                <StackLayout WidthRequest="300" HeightRequest="375" Padding="20,10" BackgroundColor="#fff" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Spacing="2">
+                    <Label x:Name="lblDonationHeader" Text="Enter a new Donation" Style="{StaticResource LabelCommon}" FontAttributes="Bold" FontSize="14" Margin="0,0,0,5" />
                     <Entry x:Name="newDonationName" Placeholder="Enter Donator Name..." Style="{StaticResource EntryCommon}" />
                     <Entry x:Name="newDonationEmail" Placeholder="Enter Donator Email..." Style="{StaticResource EntryCommon}" />
                     <Entry x:Name="newDonationPhone" Placeholder="Enter Donator Phone..." Style="{StaticResource EntryCommon}" />
