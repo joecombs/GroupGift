@@ -56,8 +56,8 @@
     <Compile Include="Models\PersonDonation.cs" />
     <Compile Include="Models\UserContact.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Services\IDataStore.cs" />
-    <Compile Include="Services\MockDataStore.cs" />
+    <Compile Include="Data\IDataStore.cs" />
+    <Compile Include="Data\MockDataStore.cs" />
     <Compile Include="ViewModels\AboutViewModel.cs" />
     <Compile Include="ViewModels\BaseViewModel.cs" />
     <Compile Include="ViewModels\GiftDetailViewModel.cs" />

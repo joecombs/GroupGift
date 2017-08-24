@@ -1,13 +1,12 @@
 ﻿using GroupGift.Models;
-using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 
-[assembly: Dependency(typeof(GroupGift.Services.MockDataStore))]
-namespace GroupGift.Services
+[assembly: Dependency(typeof(GroupGift.Data.MockDataStore))]
+namespace GroupGift.Data
 {
     public class MockDataStore : IDataStore<Gift>
     {

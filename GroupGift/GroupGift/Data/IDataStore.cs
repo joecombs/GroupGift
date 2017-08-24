@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace GroupGift.Services
+namespace GroupGift.Data
 {
     public interface IDataStore<T>
     {
