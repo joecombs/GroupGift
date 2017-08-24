@@ -8,11 +8,8 @@
                 <StackLayout WidthRequest="300" HeightRequest="375" Padding="20,10" BackgroundColor="#fff" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Spacing="0">
                     <Label Text="Enter a new Donation" Style="{StaticResource LabelCommon}" FontAttributes="Bold" FontSize="Medium" Margin="0,0,0,5" />
                     <Entry x:Name="newDonationName" Placeholder="Enter Donator Name..." Style="{StaticResource EntryCommon}" />
-                    <!--<Label Text="  Email" Style="{StaticResource LabelCommon}" />-->
                     <Entry x:Name="newDonationEmail" Placeholder="Enter Donator Email..." Style="{StaticResource EntryCommon}" />
-                    <!--<Label Text="  Phone" Style="{StaticResource LabelCommon}" />-->
                     <Entry x:Name="newDonationPhone" Placeholder="Enter Donator Phone..." Style="{StaticResource EntryCommon}" />
-                    <!--<Label Text="* Amount" Style="{StaticResource LabelCommon}" FontAttributes="Bold" />-->
                     <Entry x:Name="newDonationAmount" Placeholder="Enter an Amount..." Style="{StaticResource EntryCommon}" />
                     <Grid>
                         <Grid.ColumnDefinitions>
@@ -27,8 +24,7 @@
                             <ColumnDefinition Width="0.5*" />
                             <ColumnDefinition Width="0.5*" />
                         </Grid.ColumnDefinitions>
-                        <Button Grid.Column="0" x:Name="btnSave" Text="Save" Style="{StaticResource ButtonCommon}" 
-                                BackgroundColor="Transparent" BorderColor="Transparent" BorderRadius="0" Scale="1" TextColor="{StaticResource Primary}"  />
+                        <Button Grid.Column="0" x:Name="btnSave" Text="Save" Style="{StaticResource ButtonCommon}" />
                         <Button Grid.Column="1" x:Name="btnCancel" Text="Cancel" Style="{StaticResource ButtonCommon}" />
                     </Grid>
 
