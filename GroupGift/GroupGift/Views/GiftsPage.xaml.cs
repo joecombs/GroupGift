@@ -52,10 +52,7 @@ namespace GroupGift.Views
         protected async override void OnAppearing()
         {
             base.OnAppearing();
-            if (viewModel.Gifts.Count == 0)
-            {
-                viewModel.LoadGiftsCommand.Execute(null);
-            }
+            viewModel.LoadGiftsCommand.Execute(null);
         }
 
         /*

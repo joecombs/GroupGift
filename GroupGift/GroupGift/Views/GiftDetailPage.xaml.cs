@@ -66,10 +66,9 @@ namespace GroupGift.Views
 
             if (viewModel == null || viewModel.Gift == null || viewModel.Gift.Id > 0)
             {
-
                 ToolbarItems.Add(new ToolbarItem
                 {
-                    Text = "Archive",
+                    Text = " > Archive",
                     Order = ToolbarItemOrder.Secondary,
                     Priority = 1,
                     Command = new Command(async () =>
@@ -85,9 +84,10 @@ namespace GroupGift.Views
                     })
                 });
 
+
                 ToolbarItems.Add(new ToolbarItem
                 {
-                    Text = "Delete",
+                    Text = " > Delete",
                     Order = ToolbarItemOrder.Secondary,
                     Priority = 2,
                     Command = new Command(async () =>
@@ -110,17 +110,18 @@ namespace GroupGift.Views
         {
             try
             {
+                int iRowHeight = 25;
                 if (viewModel != null && viewModel.Gift != null)
                 {
                     if (viewModel.Gift.ItemsCollection != null)
                     {
                         if (viewModel.Gift.ItemsCollection.Count == 0) { lvItems.HeightRequest = 5; }
-                        else { lvItems.HeightRequest = (55 * viewModel.Gift.ItemsCollection.Count) + (10 * viewModel.Gift.ItemsCollection.Count); }
+                        else { lvItems.HeightRequest = (iRowHeight * viewModel.Gift.ItemsCollection.Count) + (10 * viewModel.Gift.ItemsCollection.Count); }
                     }
                     if (viewModel.Gift.DonationsCollection != null)
                     {
                         if (viewModel.Gift.DonationsCollection.Count == 0) { lvDonations.HeightRequest = 5; }
-                        else { lvDonations.HeightRequest = (55 * viewModel.Gift.DonationsCollection.Count) + (10 * viewModel.Gift.DonationsCollection.Count); }
+                        else { lvDonations.HeightRequest = (iRowHeight * viewModel.Gift.DonationsCollection.Count) + (10 * viewModel.Gift.DonationsCollection.Count); }
                     }
                 }
             }
@@ -195,25 +196,41 @@ namespace GroupGift.Views
             }
         }
 
-        private void btnGiftDelete_Clicked(object sender, System.EventArgs e)
-        {
-            var b = sender as Button;
-            GiftItem gi = b.BindingContext as GiftItem;
-
-            var vm = BindingContext as GiftDetailViewModel;
-            vm?.RemoveGiftItemCommand.Execute(gi);
-            UpdateListViewSettings();
-        }
-
         private async void lvItems_ItemSelected(object sender, SelectedItemChangedEventArgs e)
         {
-            var item = e.SelectedItem as GiftItem;
-            if (item == null) return;
+            try
+            {
+                var item = e.SelectedItem as GiftItem;
+                if (item == null) return;
 
-            //need to show the popup to allow edit of values
-            var result = await LaunchAddGiftPopup(item);
+                //need to show the popup to allow edit of values
+                var result = await LaunchAddGiftPopup(item);
 
-            lvItems.SelectedItem = null;
+                lvItems.SelectedItem = null;
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex.Message);
+            }
+        }
+
+        private void lblGiftItemDelete_Tapped(object sender, EventArgs e)
+        {
+            try
+            {
+                //if (Parent != null) (Parent as ListView).SelectedItem = this.BindingContext;
+
+                var b = sender as Label;
+                GiftItem gi = b.BindingContext as GiftItem;
+
+                var vm = BindingContext as GiftDetailViewModel;
+                vm.RemoveGiftItemCommand.Execute(gi);
+                UpdateListViewSettings();
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex.Message);
+            }
         }
 
         #endregion
@@ -287,9 +304,9 @@ namespace GroupGift.Views
             }
         }
 
-        private void btnDonationDelete_Clicked(object sender, System.EventArgs e)
+        private void lblDonationDelete_Tapped(object sender, EventArgs e)
         {
-            var b = sender as Button;
+            var b = sender as Label;
             PersonDonation pd = b.BindingContext as PersonDonation;
 
             var vm = BindingContext as GiftDetailViewModel;

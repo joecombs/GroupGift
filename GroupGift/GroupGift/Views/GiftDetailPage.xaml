@@ -2,6 +2,7 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="GroupGift.Views.GiftDetailPage"
+             xmlns:controls="clr-namespace:GroupGift.Controls"
              Title="{Binding Title}">
 
     <ScrollView Orientation="Vertical" VerticalOptions="StartAndExpand">
@@ -20,17 +21,23 @@
             </Grid>
 
             <!-- gift detail -->
-            <Frame BackgroundColor="{StaticResource Primary}" Padding="2">
+            <Frame BackgroundColor="{StaticResource Primary}" Padding="3">
                 <Label Text="Gifts" Margin="3" Style="{StaticResource LabelHeader}" BackgroundColor="Transparent" />
             </Frame>
             <ListView x:Name="lvItems" ItemsSource="{Binding Gift.ItemsCollection}" VerticalOptions="FillAndExpand" HasUnevenRows="True" CachingStrategy="RecycleElement" ItemSelected="lvItems_ItemSelected">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <ViewCell>
-                            <Grid Padding="2" RowSpacing="1">
-                                <Label Grid.Column="0" Text="{Binding Name}" Style="{StaticResource LabelCommon}" />
-                                <Label Grid.Column="1" Text="{Binding Price, StringFormat='{0:C2}'}" Style="{StaticResource LabelCommon}" />
-                                <Button Grid.Column="2" Text="Delete" Clicked="btnGiftDelete_Clicked" Style="{StaticResource ButtonListView}" FontAttributes="Bold" />
+                            <Grid Padding="5,0" RowSpacing="5" ColumnSpacing="0">
+                                <Label Grid.Column="0" Text="{Binding Name}" Style="{StaticResource LabelCommon}" VerticalOptions="Center" />
+                                <Label Grid.Column="1" Text="{Binding Price, StringFormat='{0:C2}'}" HorizontalTextAlignment="End" Style="{StaticResource LabelCommon}" VerticalOptions="Center" />
+                                <Frame Grid.Column="2" Style="{StaticResource FrameLabelButton}" Padding="5">
+                                    <Label Text="Delete" Style="{StaticResource LabelButton}">
+                                        <Label.GestureRecognizers>
+                                            <TapGestureRecognizer Tapped="lblGiftItemDelete_Tapped" NumberOfTapsRequired="1" />
+                                        </Label.GestureRecognizers>
+                                    </Label>
+                                </Frame>
                             </Grid>
                         </ViewCell>
                     </DataTemplate>
@@ -50,18 +57,24 @@
             </Grid>
 
             <!-- Donations -->
-            <Frame BackgroundColor="{StaticResource Primary}" Padding="2">
+            <Frame BackgroundColor="{StaticResource Primary}" Padding="3">
                 <Label Text="Donations" Margin="3" Style="{StaticResource LabelHeader}" BackgroundColor="Transparent" />
             </Frame>
             <ListView x:Name="lvDonations" ItemsSource="{Binding Gift.DonationsCollection}" VerticalOptions="FillAndExpand" HasUnevenRows="True" CachingStrategy="RecycleElement" ItemSelected="lvDonations_ItemSelected">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <ViewCell>
-                            <Grid Padding="10" RowSpacing="1">
-                                <Label Grid.Column="0" Text="{Binding Name}" Style="{StaticResource LabelCommon}" VerticalOptions="StartAndExpand" />
-                                <Label Grid.Column="1" Text="{Binding Amount, StringFormat='{0:C2}'}" Style="{StaticResource LabelCommon}" VerticalOptions="StartAndExpand" />
-                                <Switch Grid.Column="2" IsToggled="{Binding IsReceived}" Toggled="swDonationReceived_Toggled" VerticalOptions="StartAndExpand" />
-                                <Button Grid.Column="3" Text="Delete" Clicked="btnDonationDelete_Clicked" Style="{StaticResource ButtonListView}" FontAttributes="Bold" />
+                            <Grid Padding="5,0" RowSpacing="1" ColumnSpacing="0">
+                                <Label Grid.Column="0" Text="{Binding Name}" Style="{StaticResource LabelCommon}" VerticalOptions="Center" />
+                                <Label Grid.Column="1" Text="{Binding Amount, StringFormat='{0:C2}'}" Style="{StaticResource LabelCommon}" HorizontalTextAlignment="End" VerticalOptions="Center" />
+                                <Switch Grid.Column="2" IsToggled="{Binding IsReceived}" Toggled="swDonationReceived_Toggled" VerticalOptions="Center" />
+                                <Frame Grid.Column="3" Style="{StaticResource FrameLabelButton}" Padding="5">
+                                    <Label Text="Delete" Style="{StaticResource LabelButton}">
+                                        <Label.GestureRecognizers>
+                                            <TapGestureRecognizer Tapped="lblDonationDelete_Tapped" NumberOfTapsRequired="1" />
+                                        </Label.GestureRecognizers>
+                                    </Label>
+                                </Frame>
                             </Grid>
                         </ViewCell>
                     </DataTemplate>

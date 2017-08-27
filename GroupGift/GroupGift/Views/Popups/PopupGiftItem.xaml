@@ -1,22 +1,52 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 <ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="GroupGift.Views.Popups.PopupGiftItem">
-  <ContentView.Content>
+             x:Class="GroupGift.Views.Popups.PopupGiftItem"
+             xmlns:behaviors="clr-namespace:GroupGift.Helpers"
+             xmlns:converters="clr-namespace:GroupGift.Helpers.Converters">
+
+    <ContentView.Resources>
+        <ResourceDictionary>
+            <converters:InverseBooleanConverter x:Key="InverseBooleanConverter" />
+        </ResourceDictionary>
+    </ContentView.Resources>
+
+    <ContentView.Content>
         <Frame WidthRequest="250" HeightRequest="320" BackgroundColor="#000" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" CornerRadius="5" Padding="1" HasShadow="True">
             <Frame WidthRequest="250" HeightRequest="320" BackgroundColor="#fff" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" CornerRadius="5" Padding="2">
                 <StackLayout WidthRequest="250" HeightRequest="320" BackgroundColor="#fff" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Padding="20,10" Spacing="2">
-                    <Label x:Name="lblGiftItemHeader" Text="Enter a new Gift Item" Style="{StaticResource LabelCommon}" FontAttributes="Bold" FontSize="14" Margin="0,0,0,5" />
-                    <Entry x:Name="eNewGiftName" Placeholder="Enter the Gift Name..." Style="{StaticResource EntryCommon}" />
-                    <Entry x:Name="eNewGiftPrice" Placeholder="Enter a Price..." Style="{StaticResource EntryCommon}" />
-                    <Grid VerticalOptions="EndAndExpand">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="0.5*" />
-                            <ColumnDefinition Width="0.5*" />
-                        </Grid.ColumnDefinitions>
-                        <Button Grid.Column="0" x:Name="btnNewGiftSave" Text="Save" Style="{StaticResource ButtonCommon}" />
-                        <Button Grid.Column="1" x:Name="btnNewGiftCancel" Text="Cancel" Style="{StaticResource ButtonCommon}" />
-                    </Grid>
+                    <!-- header -->
+                    <StackLayout Orientation="Horizontal">
+                        <Label Text="&#xf06b;" Style="{StaticResource LabelCommon}" FontSize="14" Margin="0,3,3,0" FontFamily="FontAwesome" />
+                        <Label x:Name="lblGiftItemHeader" Text="Enter a new Gift Item" Style="{StaticResource LabelCommon}" FontAttributes="Bold" FontSize="14" Margin="0,0,0,5" />
+                    </StackLayout>
+                    <!-- name -->
+                    <Entry x:Name="eNewGiftName" Placeholder="* Enter the Gift Name..." Style="{StaticResource EntryCommon}">
+                        <Entry.Behaviors>
+                            <behaviors:RequiredFieldBehavior x:Name="bvRequiredName" />
+                        </Entry.Behaviors>
+                    </Entry>
+                    <!--<Label x:Name="lblNameError"  Text="Name is required." IsVisible="{Binding Source={x:Reference bvRequiredName}, Path=IsValid, Converter={StaticResource InverseBooleanConverter}}" />-->
+                    <!-- price -->
+                    <Entry x:Name="eNewGiftPrice" Placeholder="* Enter a Price..." Style="{StaticResource EntryCommon}">
+                        <Entry.Behaviors>
+                            <behaviors:RequiredFieldBehavior x:Name="bvRequiredPrice" />
+                        </Entry.Behaviors>
+                    </Entry>
+                    <!--<Label x:Name="lblGiftError" Text="Price is required." IsVisible="{Binding Source={x:Reference bvRequiredPrice}, Path=IsValid, Converter={StaticResource InverseBooleanConverter}}" />-->
+
+                    <StackLayout Orientation="Horizontal" VerticalOptions="EndAndExpand" HorizontalOptions="EndAndExpand" Spacing="10">
+                        <Label Text="Save" Style="{StaticResource LabelButton}" TextColor="{StaticResource Primary}" FontSize="Small">
+                            <Label.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="lblNewGiftSave_Tapped" NumberOfTapsRequired="1" />
+                            </Label.GestureRecognizers>
+                        </Label>
+                        <Label Text="Cancel" Style="{StaticResource LabelButton}" TextColor="{StaticResource Primary}" FontSize="Small">
+                            <Label.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="lblNewGiftCancel_Tapped" NumberOfTapsRequired="1" />
+                            </Label.GestureRecognizers>
+                        </Label>
+                    </StackLayout>
                 </StackLayout>
 
             </Frame>

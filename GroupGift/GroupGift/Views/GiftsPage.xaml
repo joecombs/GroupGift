@@ -3,12 +3,13 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="GroupGift.Views.GiftsPage"
              Title="{Binding Title}"
-             xmlns:converter="clr-namespace:GroupGift.Helpers.Converters;assembly=GroupGift">
+             xmlns:helpers="clr-namespace:GroupGift.Helpers;assembly=GroupGift"
+             xmlns:converters="clr-namespace:GroupGift.Helpers.Converters;assembly=GroupGift">
 
     <ContentPage.Resources>
         <ResourceDictionary>
-            <converter:BooleanToTextConverter x:Key="BooleanToTextConverter" />
-            <converter:DateToDayString x:Key="DateToDayString" />
+            <converters:BooleanToTextConverter x:Key="BooleanToTextConverter" />
+            <converters:DateToDayString x:Key="DateToDayString" />
         </ResourceDictionary>
     </ContentPage.Resources>
 
@@ -26,7 +27,10 @@
                     <DataTemplate>
                         <ViewCell>
                             <StackLayout Padding="10" Spacing="5">
-                                <Label Text="{Binding Name}" Style="{StaticResource LabelCommon}" FontSize="Medium" FontAttributes="Bold" />
+                                <StackLayout Orientation="Horizontal">
+                                    <Label Text="{x:Static helpers:FontAwesome.FACaretRight}" FontSize="Medium" Margin="0,5,0,0" FontFamily="FontAwesome"  />
+                                    <Label Text="{Binding Name}" Style="{StaticResource LabelCommon}" FontSize="Medium" FontAttributes="Bold" />
+                                </StackLayout>
                                 <Label Text="{Binding Date, Converter={StaticResource DateToDayString}, StringFormat='Due: {0}'}" Style="{StaticResource LabelCommon}" />
                                 <StackLayout Orientation="Horizontal" Spacing="0">
                                     <Label Text="{Binding IsFunded, Converter={StaticResource BooleanToTextConverter}, StringFormat='Funded? {0}'}" Style="{StaticResource LabelCommon}" />
@@ -37,6 +41,7 @@
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>
+
         </StackLayout>
     </ContentPage.Content>
 

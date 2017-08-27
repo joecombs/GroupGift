@@ -3,7 +3,7 @@
   <Application.Resources>
         <ResourceDictionary>
             <Color x:Key="Primary">#3c7560</Color>
-            <Color x:Key="PrimaryDark">#1e392a</Color>
+            <Color x:Key="PrimaryDark">#2e5944</Color>
             <Color x:Key="Accent">#3c7560</Color>
             <Color x:Key="LightBackgroundColor">#FAFAFA</Color>
             <Color x:Key="DarkBackgroundColor">#C0C0C0</Color>
@@ -39,7 +39,10 @@
                 <Setter Property="Margin" Value="0,20" />
                 <Setter Property="TextColor" Value="#fff" />
             </Style>
-
+            <Style x:Key="LabelError" TargetType="Label" BasedOn="{StaticResource LabelCommon}">
+                <Setter Property="TextColor" Value="#f00" />
+            </Style>
+            
             <!-- entry styles -->
             <Style x:Key="EntryCommon" TargetType="Entry">
                 <Setter Property="FontSize" Value="11" />
@@ -50,6 +53,7 @@
                 <Setter Property="HorizontalOptions" Value="FillAndExpand" />
             </Style>
 
+            <!-- buttons -->
             <Style x:Key="ButtonCommon" TargetType="Button">
                 <Setter Property="BackgroundColor" Value="#1e392a" />
                 <Setter Property="TextColor" Value="#fff" />
@@ -60,6 +64,32 @@
                 <Setter Property="TextColor" Value="#fff" />
                 <Setter Property="FontSize" Value="10" />
                 <Setter Property="HorizontalOptions" Value="End" />
+            </Style>
+            
+            <!-- clickable label/button style -->
+            <Style x:Key="FrameLabelButton" TargetType="Frame">
+                <Setter Property="BackgroundColor" Value="{StaticResource PrimaryDark}" />
+                <Setter Property="WidthRequest" Value="50" />
+                <Setter Property="Margin" Value="10,5,0,5" />
+                <Setter Property="HorizontalOptions" Value="End" />
+            </Style>
+            <Style x:Key="FrameLabelButtonTransparent" TargetType="Frame" BasedOn="{StaticResource FrameLabelButton}">
+                <Setter Property="BackgroundColor" Value="Transparent" />
+            </Style>
+
+            <Style x:Key="LabelButton" TargetType="Label">
+                <Setter Property="FontAttributes" Value="Bold" />
+                <Setter Property="HorizontalOptions" Value="Center" />
+                <Setter Property="TextColor" Value="#fff" />
+                <Setter Property="FontSize" Value="Micro" />
+                <Style.Triggers>
+                    <Trigger TargetType="Label" Property="IsEnabled" Value="True">
+                        <Setter Property="Opacity" Value="1" />
+                    </Trigger>
+                    <Trigger TargetType="Label" Property="IsEnabled" Value="False">
+                        <Setter Property="Opacity" Value="0.5" />
+                    </Trigger>
+                </Style.Triggers>
             </Style>
 
         </ResourceDictionary>

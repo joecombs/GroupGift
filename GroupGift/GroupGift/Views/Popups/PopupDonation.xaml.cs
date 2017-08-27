@@ -1,5 +1,7 @@
-﻿using GroupGift.Models;
+﻿using GroupGift.Helpers;
+using GroupGift.Models;
 using System;
+using System.Text.RegularExpressions;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -18,11 +20,20 @@ namespace GroupGift.Views.Popups
         public double DonationAmount { get; set; }
         public bool DonationIsReceived { get; set; }
 
+        public static readonly BindableProperty IsDataValidProperty = BindableProperty.Create("IsDataValid", typeof(bool), typeof(PopupGiftItem), false, BindingMode.TwoWay);
+
+        public bool IsDataValid
+        {
+            get { return (bool)GetValue(IsDataValidProperty); }
+            set { SetValue(IsDataValidProperty, value); }
+        }
+
         public PopupDonation()
         {
             Initialize();
-
             lblDonationHeader.Text = "Enter a new Donation";
+
+            IsDataValid = bvRequiredName.IsValid && bvRequiredAmount.IsValid;
         }
 
         public PopupDonation(PersonDonation donation)
@@ -36,14 +47,15 @@ namespace GroupGift.Views.Popups
             newDonationEmail.Text = donation.Email;
             newDonationPhone.Text = donation.Phone;
             newDonationIsReceived.IsToggled = donation.IsReceived;
+
+            IsDataValid = bvRequiredName.IsValid && bvRequiredAmount.IsValid;
         }
 
         private void Initialize()
         {
             InitializeComponent();
+            BindingContext = this;
 
-            btnSave.Clicked += BtnSave_Clicked;
-            btnCancel.Clicked += BtnCancel_Clicked;
             newDonationName.TextChanged += NewDonationName_TextChanged;
             newDonationEmail.TextChanged += NewDonationEmail_TextChanged;
             newDonationPhone.TextChanged += NewDonationPhone_TextChanged;
@@ -54,12 +66,12 @@ namespace GroupGift.Views.Popups
             newDonationPhone.Keyboard = Keyboard.Numeric;
         }
 
-        private void BtnSave_Clicked(object sender, EventArgs e)
+        private void lblNewDonationSave_Tapped(object sender, EventArgs e)
         {
             SaveButtonEventHandler?.Invoke(this, e);
         }
 
-        private void BtnCancel_Clicked(object sender, EventArgs e)
+        private void lblNewDonationCancel_Tapped(object sender, EventArgs e)
         {
             CancelButtonEventHandler?.Invoke(this, e);
         }
@@ -67,6 +79,7 @@ namespace GroupGift.Views.Popups
         private void NewDonationName_TextChanged(object sender, TextChangedEventArgs e)
         {
             DonationName = newDonationName.Text;
+            IsDataValid = bvRequiredName.IsValid && bvRequiredAmount.IsValid;
         }
 
         private void NewDonationEmail_TextChanged(object sender, TextChangedEventArgs e)
@@ -88,6 +101,7 @@ namespace GroupGift.Views.Popups
         {
             double.TryParse(newDonationAmount.Text, out double d);
             DonationAmount = d;
+            IsDataValid = bvRequiredName.IsValid && bvRequiredAmount.IsValid;
         }
 
     }
