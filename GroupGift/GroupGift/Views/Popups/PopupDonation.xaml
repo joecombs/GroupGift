@@ -47,7 +47,7 @@
                         <Switch Grid.Column="1" x:Name="newDonationIsReceived" />
                     </Grid>
                     <!-- buttons -->
-                    <StackLayout Orientation="Horizontal" VerticalOptions="EndAndExpand" HorizontalOptions="EndAndExpand" Spacing="10">
+                    <StackLayout Orientation="Horizontal" VerticalOptions="EndAndExpand" HorizontalOptions="EndAndExpand" Spacing="20">
                         <Label Text="Save" Style="{StaticResource LabelButton}" TextColor="{StaticResource Primary}" FontSize="Small">
                             <Label.GestureRecognizers>
                                 <TapGestureRecognizer Tapped="lblNewDonationSave_Tapped" NumberOfTapsRequired="1" />

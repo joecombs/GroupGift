@@ -22,7 +22,7 @@
 
             <ListView x:Name="lvGifts" ItemsSource="{Binding Gifts}" VerticalOptions="FillAndExpand"
                               HasUnevenRows="True" RefreshCommand="{Binding LoadGiftsCommand}" IsPullToRefreshEnabled="False"
-                              CachingStrategy="RecycleElement" ItemSelected="lvGifts_ItemSelected">
+                              CachingStrategy="RecycleElement" ItemSelected="Gifts_ItemSelected">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <ViewCell>

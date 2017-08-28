@@ -24,7 +24,7 @@
             <Frame BackgroundColor="{StaticResource Primary}" Padding="3">
                 <Label Text="Gifts" Margin="3" Style="{StaticResource LabelHeader}" BackgroundColor="Transparent" />
             </Frame>
-            <ListView x:Name="lvItems" ItemsSource="{Binding Gift.ItemsCollection}" VerticalOptions="FillAndExpand" HasUnevenRows="True" CachingStrategy="RecycleElement" ItemSelected="lvItems_ItemSelected">
+            <ListView x:Name="lvItems" ItemsSource="{Binding Gift.ItemsCollection}" VerticalOptions="FillAndExpand" HasUnevenRows="True" CachingStrategy="RecycleElement" ItemSelected="ListViewItems_ItemSelected">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <ViewCell>
@@ -67,7 +67,7 @@
                             <Grid Padding="5,0" RowSpacing="1" ColumnSpacing="0">
                                 <Label Grid.Column="0" Text="{Binding Name}" Style="{StaticResource LabelCommon}" VerticalOptions="Center" />
                                 <Label Grid.Column="1" Text="{Binding Amount, StringFormat='{0:C2}'}" Style="{StaticResource LabelCommon}" HorizontalTextAlignment="End" VerticalOptions="Center" />
-                                <Switch Grid.Column="2" IsToggled="{Binding IsReceived}" Toggled="swDonationReceived_Toggled" VerticalOptions="Center" />
+                                <Switch Grid.Column="2" IsToggled="{Binding IsReceived}" Toggled="DonationReceived_Toggled" VerticalOptions="Center" />
                                 <Frame Grid.Column="3" Style="{StaticResource FrameLabelButton}" Padding="5">
                                     <Label Text="Delete" Style="{StaticResource LabelButton}">
                                         <Label.GestureRecognizers>

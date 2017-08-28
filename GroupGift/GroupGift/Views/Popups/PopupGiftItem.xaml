@@ -35,7 +35,7 @@
                     </Entry>
                     <!--<Label x:Name="lblGiftError" Text="Price is required." IsVisible="{Binding Source={x:Reference bvRequiredPrice}, Path=IsValid, Converter={StaticResource InverseBooleanConverter}}" />-->
 
-                    <StackLayout Orientation="Horizontal" VerticalOptions="EndAndExpand" HorizontalOptions="EndAndExpand" Spacing="10">
+                    <StackLayout Orientation="Horizontal" VerticalOptions="EndAndExpand" HorizontalOptions="EndAndExpand" Spacing="20">
                         <Label Text="Save" Style="{StaticResource LabelButton}" TextColor="{StaticResource Primary}" FontSize="Small">
                             <Label.GestureRecognizers>
                                 <TapGestureRecognizer Tapped="lblNewGiftSave_Tapped" NumberOfTapsRequired="1" />

@@ -4219,9 +4219,6 @@ namespace GroupGift.Droid
 			// aapt resource value: 0x7f0a0016
 			public const int Widget_MediaRouter_MediaRouteButton = 2131361814;
 			
-			// aapt resource value: 0x7f0a0177
-			public const int noPaddingButtonStyle = 2131362167;
-			
 			static Style()
 			{
 				global::Android.Runtime.ResourceIdManager.UpdateIdValues();

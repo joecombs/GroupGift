@@ -1,35 +1,41 @@
 ﻿using Xamarin.Forms;
 using System.Collections.Generic;
 using System;
+using System.Diagnostics;
+using GroupGift.ViewModels;
+using static GroupGift.ViewModels.AboutViewModel;
 
 namespace GroupGift.Views
 {
     public partial class AboutPage : ContentPage
     {
-        public class AboutLinks
-        {
-            public string Text { get; set; }
-            public string Link { get; set; }
-        }
-
-        public List<AboutLinks> AboutLinkList;
+        AboutViewModel viewModel;
 
         public AboutPage()
         {
-            InitializeComponent();
-            lblVersion.Text = string.Format("Version {0}", "1.0.0");
-
-            //faqs
-            AboutLinkList.Add(new AboutLinks { Text = "FAQs", Link = "http://joecombs.com/projects/groupgift/" });
-            //add once app is actually published on google play
-            AboutLinkList.Add(new AboutLinks { Text = "Rate this App on Google Play", Link = "http://play.google.com/store/apps/details?id=com.google.android.apps.maps" });
-            //for now, just send the email
-            AboutLinkList.Add(new AboutLinks { Text = "Send Feedback", Link = "mailto:joe@joecombs.com" });
+            try
+            {
+                InitializeComponent(); 
+                BindingContext = viewModel = new AboutViewModel();
+            }
+            catch(Exception ex )
+            {
+                Debug.WriteLine(ex.Message);
+            }
         }
 
-        private void Button_Clicked(object sender, System.EventArgs e)
+        private void LabelAboutLink_Tapped(object sender, EventArgs e)
         {
-            Device.OpenUri(new Uri("mailto:joe@joecombs.com"));
+            Label l = (Label)sender;
+            AboutLink al = (AboutLink)l.BindingContext;
+            Device.OpenUri(new Uri(al.Link));
+        }
+
+        private void ButtonAboutLink_Clicked(object sender, EventArgs e)
+        {
+            Button b = (Button)sender;
+            AboutLink al = (AboutLink)b.BindingContext;
+            Device.OpenUri(new Uri(al.Link));
         }
     }
 }

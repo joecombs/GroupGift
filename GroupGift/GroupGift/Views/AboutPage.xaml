@@ -2,34 +2,37 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="GroupGift.Views.AboutPage"
-             xmlns:vm="clr-namespace:GroupGift.ViewModels;"
-             Title="{Binding Title}">
-    <ContentPage.BindingContext>
-        <vm:AboutViewModel />
-    </ContentPage.BindingContext>
-    <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="*"/>
-        </Grid.RowDefinitions>
-        <ScrollView Grid.Row="0">
-            <StackLayout Orientation="Vertical" Padding="20,40" Spacing="10">
-                <Image Source="icon.png" VerticalOptions="Center" />
-                <Label FontSize="22" VerticalOptions="Center">
-                    <Label.FormattedText>
-                        <FormattedString>
-                            <FormattedString.Spans>
-                                <Span Text="Group Gift" FontAttributes="Bold" FontSize="22"/>
-                                <Span Text=" "/>
-                                <Span x:Name="lblVersion" Text="Version 1.0.0" ForegroundColor="{StaticResource LightTextColor}"/>
-                            </FormattedString.Spans>
-                        </FormattedString>
-                    </Label.FormattedText>
-                </Label>
-            </StackLayout>
-            <StackLayout Orientation="Vertical">
-                <Button Text="Send Feedback" Clicked="Button_Clicked" />
-            </StackLayout>
-        </ScrollView>
-    </Grid>
-    
+             Title="{Binding Title}"
+             xmlns:helpers="clr-namespace:GroupGift.Helpers;assembly=GroupGift">
+
+    <StackLayout Orientation="Vertical" Padding="20" Spacing="1">
+        <StackLayout Orientation="Horizontal" Padding="0" Spacing="0" HorizontalOptions="Center">
+            <Image Source="icon.png" Margin="-10,0,0,0" />
+            <Label FontSize="Large" VerticalOptions="Center" Text="{Binding AboutAppTitle}" FontAttributes="Bold" Margin="-10,0" />
+        </StackLayout>
+        <Label FontSize="Small" HorizontalOptions="Center" Text="{Binding AboutVersion}" TextColor="{StaticResource LightTextColor}" />
+
+        <BoxView Color="{StaticResource Primary}" HeightRequest="1" Margin="0,10" />
+        
+        <ListView x:Name="lvAboutLinks" ItemsSource="{Binding AboutLinkList}" VerticalOptions="FillAndExpand" HasUnevenRows="True" HeightRequest="200">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <StackLayout Orientation="Vertical" Padding="5,10">
+                            <StackLayout Orientation="Horizontal">
+                                <Label Text="{x:Static helpers:FontAwesome.FACaretRight}" FontSize="Medium" Margin="0,5,5,0" FontFamily="FontAwesome"  />
+                                <Label Text="{Binding Text}" Style="{StaticResource LabelButton}" TextColor="{StaticResource Primary}" FontSize="Medium" HorizontalOptions="StartAndExpand">
+                                    <Label.GestureRecognizers>
+                                        <TapGestureRecognizer Tapped="LabelAboutLink_Tapped" NumberOfTapsRequired="1" />
+                                    </Label.GestureRecognizers>
+                                </Label>
+                            </StackLayout>
+                        </StackLayout>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+        
+    </StackLayout>
+
 </ContentPage>

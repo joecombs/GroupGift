@@ -68,7 +68,7 @@ namespace GroupGift.Views
             {
                 ToolbarItems.Add(new ToolbarItem
                 {
-                    Text = " > Archive",
+                    Text = "Archive",
                     Order = ToolbarItemOrder.Secondary,
                     Priority = 1,
                     Command = new Command(async () =>
@@ -87,7 +87,7 @@ namespace GroupGift.Views
 
                 ToolbarItems.Add(new ToolbarItem
                 {
-                    Text = " > Delete",
+                    Text = "Delete",
                     Order = ToolbarItemOrder.Secondary,
                     Priority = 2,
                     Command = new Command(async () =>
@@ -101,6 +101,7 @@ namespace GroupGift.Views
 
                     })
                 });
+
             }
 
             UpdateListViewSettings();
@@ -156,9 +157,8 @@ namespace GroupGift.Views
 
                 inputview.SaveButtonEventHandler += (inputsender, obj) =>
                 {
-                    if (inputsender is PopupGiftItem)
+                    if (inputsender is PopupGiftItem popgi)
                     {
-                        PopupGiftItem popgi = (PopupGiftItem)inputsender;
                         if (giftitem == null)
                         {
                             GiftItem gi = new GiftItem { Guid = Guid.NewGuid().ToString(), Name = popgi.GiftItemName, Price = popgi.GiftItemPrice };
@@ -196,7 +196,7 @@ namespace GroupGift.Views
             }
         }
 
-        private async void lvItems_ItemSelected(object sender, SelectedItemChangedEventArgs e)
+        private async void ListViewItems_ItemSelected(object sender, SelectedItemChangedEventArgs e)
         {
             try
             {
@@ -262,9 +262,8 @@ namespace GroupGift.Views
 
                 inputview.SaveButtonEventHandler += (inputsender, obj) =>
                 {
-                    if (inputsender is PopupDonation)
+                    if (inputsender is PopupDonation popd)
                     {
-                        PopupDonation popd = (PopupDonation)inputsender;
                         if (donation == null)
                         {
                             PersonDonation pd = new PersonDonation { Guid = Guid.NewGuid().ToString(), Name = popd.DonationName, Email = popd.DonationEmail, Phone = popd.DonationPhone, Amount = popd.DonationAmount, IsReceived = popd.DonationIsReceived };
@@ -325,7 +324,7 @@ namespace GroupGift.Views
             lvDonations.SelectedItem = null;
         }
 
-        private void swDonationReceived_Toggled(object sender, ToggledEventArgs e)
+        private void DonationReceived_Toggled(object sender, ToggledEventArgs e)
         {
             if (sender is Switch s)
             {
