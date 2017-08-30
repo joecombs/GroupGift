@@ -7,6 +7,12 @@
   <color name="PrimaryDarkColor">#1e392a</color>
   <color name="AccentColor">#1e392a</color>
 
+  <style name="Theme.Splash" parent="android:Theme">
+    <item name="android:windowBackground">@drawable/splash_screen</item>
+    <item name="android:windowNoTitle">true</item>
+    <item name="android:windowFullscreen">false</item>    
+  </style>
+  
   <style name="MyTheme" parent="MyTheme.Base">
     <item name="android:colorPressedHighlight">@color/ListViewSelected</item>
     <item name="android:colorLongPressedHighlight">@color/ListViewHighlighted</item>
