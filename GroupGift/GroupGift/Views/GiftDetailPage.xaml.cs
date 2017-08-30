@@ -2,6 +2,7 @@
 using GroupGift.Models;
 using GroupGift.ViewModels;
 using GroupGift.Views.Popups;
+using Plugin.Messaging;
 using Rg.Plugins.Popup.Services;
 using System;
 using System.Diagnostics;
@@ -327,5 +328,43 @@ namespace GroupGift.Views
 
         #endregion
 
+        private void DonationEmail_Clicked(object sender, EventArgs e)
+        {
+            try
+            {
+                MenuItem mi = sender as MenuItem;
+                PersonDonation pd = mi.CommandParameter as PersonDonation;
+                var semail = string.Format("mailto:{0}?Subject=Group Gift Reminder?Body=This is a reminder about the upcoming {1} Group Gift. You have pledged to donate {2} to the gift.", pd.Email, viewModel.Gift.Name, pd.Amount);
+                Device.OpenUri(new Uri(semail));
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex.Message);
+            }
+        }
+
+        private void DonationText_Clicked(object sender, EventArgs e)
+        {
+            try
+            {
+                MenuItem mi = sender as MenuItem;
+                PersonDonation pd = mi.CommandParameter as PersonDonation;
+
+                string msg = string.Format("{0}, this is a reminder that you pledged to donate {1} to {2}.", pd.Name, string.Format("{0:C2}", pd.Amount), viewModel.Gift.Name);
+                CrossMessaging.Current.SmsMessenger.SendDonationSms(pd.Phone, msg);
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex.Message);
+            }
+        }
+
+        private void DonationCall_Clicked(object sender, EventArgs e)
+        {
+            MenuItem mi = sender as MenuItem;
+            PersonDonation pd = mi.CommandParameter as PersonDonation;
+
+            CrossMessaging.Current.PhoneDialer.MakeDonationCall(pd.Phone);
+        }
     }
 }

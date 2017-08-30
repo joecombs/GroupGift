@@ -65,6 +65,11 @@
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <ViewCell>
+                            <ViewCell.ContextActions>
+                                <MenuItem Text="Email" Clicked="DonationEmail_Clicked" CommandParameter="{Binding}" />
+                                <MenuItem Text="Text" Clicked="DonationText_Clicked" CommandParameter="{Binding}" />
+                                <MenuItem Text="Call" Clicked="DonationCall_Clicked" CommandParameter="{Binding}" />
+                            </ViewCell.ContextActions>
                             <Grid Padding="5,0" RowSpacing="1" ColumnSpacing="0">
                                 <Label Grid.Column="0" Text="{Binding Name}" Style="{StaticResource LabelCommon}" VerticalOptions="Center" />
                                 <Label Grid.Column="1" Text="{Binding Amount, StringFormat='{0:C2}'}" Style="{StaticResource LabelCommon}" HorizontalTextAlignment="End" VerticalOptions="Center" />
