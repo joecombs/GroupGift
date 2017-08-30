@@ -1,6 +1,8 @@
 ﻿using GroupGift.Models;
+using GroupGift.Views;
 using System;
 using System.Diagnostics;
+using System.Windows.Input;
 using Xamarin.Forms;
 
 namespace GroupGift.ViewModels
@@ -36,28 +38,37 @@ namespace GroupGift.ViewModels
             }
 		}
 
-        public Command<GiftItem> RemoveGiftItemCommand
+        public ICommand DeleteGiftItemCommand
         {
-            get
+            get { return new Command<GiftItem>(DeleteGiftItem); }
+        }
+
+        private async void DeleteGiftItem(object obj)
+        {
+            GiftItem giftitem = obj as GiftItem;
+            if (await Application.Current.MainPage.DisplayAlert("Delete Gift Item", "Are you sure you want to delete this gift item?", "Yes", "No"))
             {
-                return new Command<GiftItem>((giftitem) =>
-                {
-                    Gift.ItemsCollection.Remove(giftitem);
-                    Gift.CalculateTotals();
-                });
+                Gift.ItemsCollection.Remove(giftitem);
+                Gift.CalculateTotals();
+                MessagingCenter.Send(this, "DeleteGiftItem", giftitem);
             }
         }
 
-        public Command<PersonDonation> RemoveDonationCommand
+        public ICommand DeleteDonationCommand
         {
-            get
+            get { return new Command<PersonDonation>(DeleteDonation); }
+        }
+
+        private async void DeleteDonation(object obj)
+        {
+            PersonDonation donation = obj as PersonDonation;
+            if (await Application.Current.MainPage.DisplayAlert("Delete Donation", "Are you sure you want to delete this Donation?", "Yes", "No"))
             {
-                return new Command<PersonDonation>((donation) =>
-                {
-                    Gift.DonationsCollection.Remove(donation);
-                    Gift.CalculateTotals();
-                });
+                Gift.DonationsCollection.Remove(donation);
+                Gift.CalculateTotals();
+                MessagingCenter.Send(this, "DeleteDonation", donation);
             }
         }
+
     }
 }

@@ -105,6 +105,30 @@ namespace GroupGift.Views
             }
 
             UpdateListViewSettings();
+
+            MessagingCenter.Subscribe<GiftDetailViewModel, PersonDonation>(this, "DeleteDonation", (obj, donation) =>
+            {
+                try
+                {
+                    UpdateListViewSettings();
+                }
+                catch (Exception ex)
+                {
+                    Debug.WriteLine(ex.Message);
+                }
+            });
+
+            MessagingCenter.Subscribe<GiftDetailViewModel, GiftItem>(this, "DeleteGiftItem", (obj, donation) =>
+            {
+                try
+                {
+                    UpdateListViewSettings();
+                }
+                catch (Exception ex)
+                {
+                    Debug.WriteLine(ex.Message);
+                }
+            });
         }
 
         private void UpdateListViewSettings()
@@ -137,7 +161,6 @@ namespace GroupGift.Views
         private async void btnAddGiftItem_Clicked(object sender, System.EventArgs e)
         {
             var result = await LaunchAddGiftPopup(null);
-            //load add donation screen
             UpdateListViewSettings();
         }
 
@@ -214,35 +237,13 @@ namespace GroupGift.Views
             }
         }
 
-        private void lblGiftItemDelete_Tapped(object sender, EventArgs e)
-        {
-            try
-            {
-                //if (Parent != null) (Parent as ListView).SelectedItem = this.BindingContext;
-
-                var b = sender as Label;
-                GiftItem gi = b.BindingContext as GiftItem;
-
-                var vm = BindingContext as GiftDetailViewModel;
-                vm.RemoveGiftItemCommand.Execute(gi);
-                UpdateListViewSettings();
-            }
-            catch (Exception ex)
-            {
-                Debug.WriteLine(ex.Message);
-            }
-        }
-
         #endregion
 
         #region Donation Stuff
 
         private async void btnAddDonation_Clicked(object sender, EventArgs e)
         {
-
             var result = await LaunchDonationPopup(null);
-
-            //load add donation screen
             UpdateListViewSettings();
         }
 
@@ -301,16 +302,6 @@ namespace GroupGift.Views
                 Debug.WriteLine(ex.Message);
                 return null;
             }
-        }
-
-        private void lblDonationDelete_Tapped(object sender, EventArgs e)
-        {
-            var b = sender as Label;
-            PersonDonation pd = b.BindingContext as PersonDonation;
-
-            var vm = BindingContext as GiftDetailViewModel;
-            vm?.RemoveDonationCommand.Execute(pd);
-            UpdateListViewSettings();
         }
 
         private async void lvDonations_ItemSelected(object sender, SelectedItemChangedEventArgs e)

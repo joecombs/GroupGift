@@ -20,7 +20,7 @@ namespace GroupGift.ViewModels
         {
             Title = "About";
             AboutAppTitle = "Group Gift";
-            AboutVersion = string.Format(" Version {0}", "1.0.2");
+            AboutVersion = string.Format(" Version {0}", "1.0.3");
 
             AboutLinkList = new ObservableRangeCollection<AboutLink>
             {
