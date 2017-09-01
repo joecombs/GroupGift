@@ -11,7 +11,7 @@ namespace GroupGift.Views.Popups
     public partial class PopupDonation : ContentView
     {
         public EventHandler CancelButtonEventHandler { get; set; }
-        public EventHandler SaveButtonEventHandler { get; set; }
+        public EventHandler OKButtonEventHandler { get; set; }
 
         public string DonationGuid { get; set; }
         public string DonationName { get; set; }
@@ -20,12 +20,18 @@ namespace GroupGift.Views.Popups
         public double DonationAmount { get; set; }
         public bool DonationIsReceived { get; set; }
 
-        public static readonly BindableProperty IsDataValidProperty = BindableProperty.Create("IsDataValid", typeof(bool), typeof(PopupGiftItem), false, BindingMode.TwoWay);
-
-        public bool IsDataValid
+        public static readonly BindableProperty IsValidNameProperty = BindableProperty.Create("IsValidName", typeof(bool), typeof(PopupGiftItem), false, BindingMode.TwoWay);
+        public bool IsValidName
         {
-            get { return (bool)GetValue(IsDataValidProperty); }
-            set { SetValue(IsDataValidProperty, value); }
+            get { return (bool)GetValue(IsValidNameProperty); }
+            set { SetValue(IsValidNameProperty, value); }
+        }
+
+        public static readonly BindableProperty IsValidAmountProperty = BindableProperty.Create("IsValidAmount", typeof(bool), typeof(PopupGiftItem), false, BindingMode.TwoWay);
+        public bool IsValidAmount
+        {
+            get { return (bool)GetValue(IsValidAmountProperty); }
+            set { SetValue(IsValidAmountProperty, value); }
         }
 
         public PopupDonation()
@@ -33,7 +39,8 @@ namespace GroupGift.Views.Popups
             Initialize();
             lblDonationHeader.Text = "Enter a new Donation";
 
-            IsDataValid = bvRequiredName.IsValid && bvRequiredAmount.IsValid;
+            IsValidName = true;
+            IsValidAmount = true;        
         }
 
         public PopupDonation(PersonDonation donation)
@@ -42,13 +49,14 @@ namespace GroupGift.Views.Popups
             lblDonationHeader.Text = "Update Donation";
 
             DonationGuid = donation.Guid;
-            newDonationName.Text = donation.Name;
-            newDonationAmount.Text = donation.Amount.ToString();
-            newDonationEmail.Text = donation.Email;
-            newDonationPhone.Text = donation.Phone;
-            newDonationIsReceived.IsToggled = donation.IsReceived;
+            eDonationName.Text = donation.Name;
+            eDonationAmount.Text = donation.Amount.ToString();
+            eDonationEmail.Text = donation.Email;
+            eDonationPhone.Text = donation.Phone;
+            swDonationIsReceived.IsToggled = donation.IsReceived;
 
-            IsDataValid = bvRequiredName.IsValid && bvRequiredAmount.IsValid;
+            //on initial load of screen, only do data checks on existing item
+            DoDataChecks();
         }
 
         private void Initialize()
@@ -56,52 +64,58 @@ namespace GroupGift.Views.Popups
             InitializeComponent();
             BindingContext = this;
 
-            newDonationName.TextChanged += NewDonationName_TextChanged;
-            newDonationEmail.TextChanged += NewDonationEmail_TextChanged;
-            newDonationPhone.TextChanged += NewDonationPhone_TextChanged;
-            newDonationAmount.TextChanged += NewDonationAmount_TextChanged;
-            newDonationIsReceived.Toggled += NewDonationIsReceived_Toggled;
+            eDonationName.TextChanged += DonationName_TextChanged;
+            eDonationEmail.TextChanged += DonationEmail_TextChanged;
+            eDonationPhone.TextChanged += DonationPhone_TextChanged;
+            eDonationAmount.TextChanged += DonationAmount_TextChanged;
+            swDonationIsReceived.Toggled += DonationIsReceived_Toggled;
 
-            newDonationAmount.Keyboard = Keyboard.Numeric;
-            newDonationPhone.Keyboard = Keyboard.Numeric;
+            eDonationAmount.Keyboard = Keyboard.Numeric;
+            eDonationPhone.Keyboard = Keyboard.Numeric;
         }
 
-        private void lblNewDonationSave_Tapped(object sender, EventArgs e)
+        private void DonationOK_Tapped(object sender, EventArgs e)
         {
-            SaveButtonEventHandler?.Invoke(this, e);
+            OKButtonEventHandler?.Invoke(this, e);
         }
 
-        private void lblNewDonationCancel_Tapped(object sender, EventArgs e)
+        private void DonationCancel_Tapped(object sender, EventArgs e)
         {
             CancelButtonEventHandler?.Invoke(this, e);
         }
 
-        private void NewDonationName_TextChanged(object sender, TextChangedEventArgs e)
+        private void DonationName_TextChanged(object sender, TextChangedEventArgs e)
         {
-            DonationName = newDonationName.Text;
-            IsDataValid = bvRequiredName.IsValid && bvRequiredAmount.IsValid;
+            DonationName = eDonationName.Text;
+            DoDataChecks();
         }
 
-        private void NewDonationEmail_TextChanged(object sender, TextChangedEventArgs e)
+        private void DonationEmail_TextChanged(object sender, TextChangedEventArgs e)
         {
-            DonationEmail = newDonationEmail.Text;
+            DonationEmail = eDonationEmail.Text;
         }
 
-        private void NewDonationPhone_TextChanged(object sender, TextChangedEventArgs e)
+        private void DonationPhone_TextChanged(object sender, TextChangedEventArgs e)
         {
-            DonationPhone = newDonationPhone.Text;
+            DonationPhone = eDonationPhone.Text;
         }
 
-        private void NewDonationIsReceived_Toggled(object sender, ToggledEventArgs e)
+        private void DonationIsReceived_Toggled(object sender, ToggledEventArgs e)
         {
-            DonationIsReceived = newDonationIsReceived.IsToggled;
+            DonationIsReceived = swDonationIsReceived.IsToggled;
         }
 
-        private void NewDonationAmount_TextChanged(object sender, TextChangedEventArgs e)
+        private void DonationAmount_TextChanged(object sender, TextChangedEventArgs e)
         {
-            double.TryParse(newDonationAmount.Text, out double d);
+            double.TryParse(eDonationAmount.Text, out double d);
             DonationAmount = d;
-            IsDataValid = bvRequiredName.IsValid && bvRequiredAmount.IsValid;
+            DoDataChecks();
+        }
+
+        private void DoDataChecks()
+        {
+            IsValidName = !string.IsNullOrWhiteSpace(DonationName);
+            IsValidAmount = !string.IsNullOrWhiteSpace(eDonationAmount.Text);
         }
 
     }

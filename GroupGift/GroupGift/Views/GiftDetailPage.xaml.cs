@@ -179,7 +179,7 @@ namespace GroupGift.Views
                     popup.PageClosedTaskCompletionSource.SetResult(null);
                 };
 
-                inputview.SaveButtonEventHandler += (inputsender, obj) =>
+                inputview.OKButtonEventHandler += (inputsender, obj) =>
                 {
                     if (inputsender is PopupGiftItem popgi)
                     {
@@ -262,7 +262,7 @@ namespace GroupGift.Views
                     popup.PageClosedTaskCompletionSource.SetResult(null);
                 };
 
-                inputview.SaveButtonEventHandler += (inputsender, obj) =>
+                inputview.OKButtonEventHandler += (inputsender, obj) =>
                 {
                     if (inputsender is PopupDonation popd)
                     {
@@ -334,7 +334,7 @@ namespace GroupGift.Views
             {
                 MenuItem mi = sender as MenuItem;
                 PersonDonation pd = mi.CommandParameter as PersonDonation;
-                var semail = string.Format("mailto:{0}?Subject=Group Gift Reminder?Body=This is a reminder about the upcoming {1} Group Gift. You have pledged to donate {2} to the gift.", pd.Email, viewModel.Gift.Name, pd.Amount);
+                var semail = string.Format("mailto:{0}?Subject=Group Gift Reminder&Body=This is a reminder about the upcoming {1} Group Gift. You pledged to donate {2} to the gift.", pd.Email, viewModel.Gift.Name, pd.Amount);
                 Device.OpenUri(new Uri(semail));
             }
             catch (Exception ex)

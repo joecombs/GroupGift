@@ -11,25 +11,33 @@ namespace GroupGift.Views.Popups
     public partial class PopupGiftItem : ContentView
     {
         public EventHandler CancelButtonEventHandler { get; set; }
-        public EventHandler SaveButtonEventHandler { get; set; }
+        public EventHandler OKButtonEventHandler { get; set; }
 
         public string GiftItemGuid { get; set; }
         public string GiftItemName { get; set; }
         public double GiftItemPrice { get; set; }
 
-
-        public static readonly BindableProperty IsDataValidProperty = BindableProperty.Create("IsDataValid", typeof(bool), typeof(PopupGiftItem), false, BindingMode.TwoWay);
-
-        public bool IsDataValid
+        public static readonly BindableProperty IsValidNameProperty = BindableProperty.Create("IsValidName", typeof(bool), typeof(PopupGiftItem), false, BindingMode.TwoWay);
+        public bool IsValidName
         {
-            get { return (bool)GetValue(IsDataValidProperty); }
-            set { SetValue(IsDataValidProperty, value); }
+            get { return (bool)GetValue(IsValidNameProperty); }
+            set { SetValue(IsValidNameProperty, value); }
+        }
+
+        public static readonly BindableProperty IsValidPriceProperty = BindableProperty.Create("IsValidPrice", typeof(bool), typeof(PopupGiftItem), false, BindingMode.TwoWay);
+        public bool IsValidPrice
+        {
+            get { return (bool)GetValue(IsValidPriceProperty); }
+            set { SetValue(IsValidPriceProperty, value); }
         }
 
         public PopupGiftItem()
         {
             Initialize();
             lblGiftItemHeader.Text = "Enter a new Gift Item";
+            //initially set to true so errors are only shown after save click
+            IsValidName = true;
+            IsValidPrice = true;
         }
 
         public PopupGiftItem(GiftItem giftitem)
@@ -39,8 +47,11 @@ namespace GroupGift.Views.Popups
 
             //set screen values
             GiftItemGuid = giftitem.Guid;
-            eNewGiftName.Text = giftitem.Name;
-            eNewGiftPrice.Text = giftitem.Price.ToString();
+            eGiftName.Text = giftitem.Name;
+            eGiftPrice.Text = giftitem.Price.ToString();
+
+            //on initial load of screen, only do data checks on existing item
+            DoDataChecks();
         }
 
         private void Initialize()
@@ -48,41 +59,44 @@ namespace GroupGift.Views.Popups
             InitializeComponent();
             BindingContext = this;
 
-            IsDataValid = false;
+            eGiftName.TextChanged += GiftName_TextChanged;
+            eGiftPrice.TextChanged += GiftPrice_TextChanged;
 
-            eNewGiftName.TextChanged += eNewGiftName_TextChanged;
-            eNewGiftPrice.TextChanged += eNewGiftPrice_TextChanged;
-
-            eNewGiftPrice.Keyboard = Keyboard.Numeric;
+            eGiftPrice.Keyboard = Keyboard.Numeric;
         }
 
-        private void eNewGiftName_TextChanged(object sender, TextChangedEventArgs e)
+        private void GiftName_TextChanged(object sender, TextChangedEventArgs e)
         {
-            GiftItemName = eNewGiftName.Text;
-            IsDataValid = bvRequiredName.IsValid && bvRequiredPrice.IsValid;
+            GiftItemName = eGiftName.Text;
+            IsValidName = !string.IsNullOrEmpty(GiftItemName);
         }
 
-        private void eNewGiftPrice_TextChanged(object sender, TextChangedEventArgs e)
+        private void GiftPrice_TextChanged(object sender, TextChangedEventArgs e)
         {
             double d = 0;
-            double.TryParse(eNewGiftPrice.Text, out d);
+            double.TryParse(eGiftPrice.Text, out d);
             GiftItemPrice = d;
-            IsDataValid = bvRequiredName.IsValid && bvRequiredPrice.IsValid;
+            IsValidPrice = !string.IsNullOrEmpty(eGiftPrice.Text);
         }
 
-        private void lblNewGiftSave_Tapped(object sender, EventArgs e)
+        private void GiftOK_Tapped(object sender, EventArgs e)
         {
-            SaveButtonEventHandler?.Invoke(this, e);
+            DoDataChecks();
+            if (IsValidName && IsValidPrice)
+            {
+                OKButtonEventHandler?.Invoke(this, e);
+            }
         }
 
-        private void lblNewGiftCancel_Tapped(object sender, EventArgs e)
+        private void GiftCancel_Tapped(object sender, EventArgs e)
         {
             CancelButtonEventHandler?.Invoke(this, e);
         }
 
-        private void TapGestureRecognizer_Tapped(object sender, EventArgs e)
+        private void DoDataChecks()
         {
-
+            IsValidPrice = !string.IsNullOrWhiteSpace(eGiftPrice.Text);
+            IsValidName = !string.IsNullOrWhiteSpace(eGiftName.Text);
         }
     }
 }

@@ -21,22 +21,15 @@
                         <Label x:Name="lblDonationHeader" Text="Enter a new Donation" Style="{StaticResource LabelCommon}" FontAttributes="Bold" FontSize="14" Margin="0,0,0,5" />
                     </StackLayout>
                     <!-- name -->
-                    <Entry x:Name="newDonationName" Placeholder="* Enter Donator Name..." Style="{StaticResource EntryCommon}">
-                        <Entry.Behaviors>
-                            <behaviors:RequiredFieldBehavior x:Name="bvRequiredName" />
-                        </Entry.Behaviors>
-                    </Entry>
-                    <!--<Label x:Name="lblNameWarning" Text="Name is required" Style="{StaticResource LabelError}" IsVisible="{Binding IsDataValid, Converter={StaticResource InverseBooleanConverter}}" />-->
+                    <Entry x:Name="eDonationName" Placeholder="* Enter Donator Name..." Style="{StaticResource EntryCommon}" />
+                    <Label x:Name="lblNameWarning" Text="Name is required" Style="{StaticResource LabelError}" IsVisible="{Binding IsValidName, Converter={StaticResource InverseBooleanConverter}}" />
                     <!-- email -->
-                    <Entry x:Name="newDonationEmail" Placeholder="Enter Donator Email..." Style="{StaticResource EntryCommon}" />
+                    <Entry x:Name="eDonationEmail" Placeholder="Enter Donator Email..." Style="{StaticResource EntryCommon}" />
                     <!-- phone -->
-                    <Entry x:Name="newDonationPhone" Placeholder="Enter Donator Phone..." Style="{StaticResource EntryCommon}" />
+                    <Entry x:Name="eDonationPhone" Placeholder="Enter Donator Phone..." Style="{StaticResource EntryCommon}" />
                     <!-- amount -->
-                    <Entry x:Name="newDonationAmount" Placeholder="* Enter an Amount..." Style="{StaticResource EntryCommon}">
-                        <Entry.Behaviors>
-                            <behaviors:RequiredFieldBehavior x:Name="bvRequiredAmount" />
-                        </Entry.Behaviors>
-                    </Entry>
+                    <Entry x:Name="eDonationAmount" Placeholder="* Enter an Amount..." Style="{StaticResource EntryCommon}" />
+                    <Label x:Name="lblAmountWarning" Text="Amount is required" Style="{StaticResource LabelError}" IsVisible="{Binding IsValidAmount, Converter={StaticResource InverseBooleanConverter}}" />
                     <!-- received -->
                     <Grid>
                         <Grid.ColumnDefinitions>
@@ -44,18 +37,18 @@
                             <ColumnDefinition Width="0.5*" />
                         </Grid.ColumnDefinitions>
                         <Label Grid.Column="0" Text="Received?" Style="{StaticResource LabelCommon}" Margin="0,10,0,0" />
-                        <Switch Grid.Column="1" x:Name="newDonationIsReceived" />
+                        <Switch Grid.Column="1" x:Name="swDonationIsReceived" />
                     </Grid>
                     <!-- buttons -->
                     <StackLayout Orientation="Horizontal" VerticalOptions="EndAndExpand" HorizontalOptions="EndAndExpand" Spacing="20">
-                        <Label Text="Save" Style="{StaticResource LabelButton}" TextColor="{StaticResource Primary}" FontSize="Small">
+                        <Label Text="OK" Style="{StaticResource LabelButton}" TextColor="{StaticResource Primary}" FontSize="Small">
                             <Label.GestureRecognizers>
-                                <TapGestureRecognizer Tapped="lblNewDonationSave_Tapped" NumberOfTapsRequired="1" />
+                                <TapGestureRecognizer Tapped="DonationOK_Tapped" NumberOfTapsRequired="1" />
                             </Label.GestureRecognizers>
                         </Label>
                         <Label Text="Cancel" Style="{StaticResource LabelButton}" TextColor="{StaticResource Primary}" FontSize="Small">
                             <Label.GestureRecognizers>
-                                <TapGestureRecognizer Tapped="lblNewDonationCancel_Tapped" NumberOfTapsRequired="1" />
+                                <TapGestureRecognizer Tapped="DonationCancel_Tapped" NumberOfTapsRequired="1" />
                             </Label.GestureRecognizers>
                         </Label>
                     </StackLayout>
