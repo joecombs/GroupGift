@@ -85,6 +85,8 @@ namespace GroupGift.ViewModels
                 {
                     if (!g.IsArchived)
                     {
+                        string cd = string.Format("{0:MM/dd/yyyy}", DateTime.Now);
+                        if (g.Date < DateTime.Parse(cd)) { g.IsCompleted = true; }
                         GiftWrapper gw = new GiftWrapper(g);
                         Gifts.Add(gw);
                     }

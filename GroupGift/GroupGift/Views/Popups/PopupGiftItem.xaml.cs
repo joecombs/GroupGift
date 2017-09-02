@@ -17,6 +17,8 @@ namespace GroupGift.Views.Popups
         public string GiftItemName { get; set; }
         public double GiftItemPrice { get; set; }
 
+        private bool _isDoDataChecks = false;
+
         public static readonly BindableProperty IsValidNameProperty = BindableProperty.Create("IsValidName", typeof(bool), typeof(PopupGiftItem), false, BindingMode.TwoWay);
         public bool IsValidName
         {
@@ -35,7 +37,9 @@ namespace GroupGift.Views.Popups
         {
             Initialize();
             lblGiftItemHeader.Text = "Enter a new Gift Item";
+
             //initially set to true so errors are only shown after save click
+            _isDoDataChecks = false;
             IsValidName = true;
             IsValidPrice = true;
         }
@@ -51,6 +55,7 @@ namespace GroupGift.Views.Popups
             eGiftPrice.Text = giftitem.Price.ToString();
 
             //on initial load of screen, only do data checks on existing item
+            _isDoDataChecks = true;
             DoDataChecks();
         }
 
@@ -81,6 +86,7 @@ namespace GroupGift.Views.Popups
 
         private void GiftOK_Tapped(object sender, EventArgs e)
         {
+            _isDoDataChecks = true;
             DoDataChecks();
             if (IsValidName && IsValidPrice)
             {
@@ -95,8 +101,11 @@ namespace GroupGift.Views.Popups
 
         private void DoDataChecks()
         {
-            IsValidPrice = !string.IsNullOrWhiteSpace(eGiftPrice.Text);
-            IsValidName = !string.IsNullOrWhiteSpace(eGiftName.Text);
+            if (_isDoDataChecks)
+            {
+                IsValidPrice = !string.IsNullOrWhiteSpace(eGiftPrice.Text);
+                IsValidName = !string.IsNullOrWhiteSpace(eGiftName.Text);
+            }
         }
     }
 }

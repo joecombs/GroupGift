@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
@@ -21,6 +22,7 @@ namespace GroupGift.Models
                     IsArchived = IsArchived,
                     IsCompleted = IsCompleted,
                     IsFunded = IsFunded,
+                    IsReceived = IsReceived,
                     Items = Items,
                     Name = Name,
                     TotalDonations = TotalDonations,
@@ -67,6 +69,10 @@ namespace GroupGift.Models
                 if (TotalDonations >= TotalGiftPrice) { IsFunded = true; }
                 else { IsFunded = false; }
             }
+            if (BaseGift.Date > DateTime.Now)
+            {
+                IsCompleted = true;
+            }
         }
 
         public GiftWrapper()
@@ -84,6 +90,7 @@ namespace GroupGift.Models
             IsArchived = gift.IsArchived;
             IsCompleted = gift.IsCompleted;
             IsFunded = gift.IsFunded;
+            IsReceived = gift.IsReceived;
             Items = gift.Items;
             Name = gift.Name;
             TotalDonations = gift.TotalDonations;
@@ -91,7 +98,7 @@ namespace GroupGift.Models
             TotalGiftPrice = gift.TotalGiftPrice;
             TotalRemainingAmt = gift.TotalRemainingAmt;
             TotalRemainingReceivedAmt = gift.TotalRemainingReceivedAmt;
-            UpdatedAt = gift.UpdatedAt;
+            UpdatedAt = gift.UpdatedAt;             
 
             Initialize();
         }

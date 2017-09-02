@@ -20,6 +20,7 @@ namespace GroupGift.Views.Popups
         public double DonationAmount { get; set; }
         public bool DonationIsReceived { get; set; }
 
+        private bool _isDoDataChecks = false;
         public static readonly BindableProperty IsValidNameProperty = BindableProperty.Create("IsValidName", typeof(bool), typeof(PopupGiftItem), false, BindingMode.TwoWay);
         public bool IsValidName
         {
@@ -40,7 +41,8 @@ namespace GroupGift.Views.Popups
             lblDonationHeader.Text = "Enter a new Donation";
 
             IsValidName = true;
-            IsValidAmount = true;        
+            IsValidAmount = true;
+            _isDoDataChecks = false;
         }
 
         public PopupDonation(PersonDonation donation)
@@ -56,6 +58,7 @@ namespace GroupGift.Views.Popups
             swDonationIsReceived.IsToggled = donation.IsReceived;
 
             //on initial load of screen, only do data checks on existing item
+            _isDoDataChecks = true;
             DoDataChecks();
         }
 
@@ -76,7 +79,12 @@ namespace GroupGift.Views.Popups
 
         private void DonationOK_Tapped(object sender, EventArgs e)
         {
-            OKButtonEventHandler?.Invoke(this, e);
+            _isDoDataChecks = true;
+            DoDataChecks();
+            if (IsValidName && IsValidAmount)
+            {
+                OKButtonEventHandler?.Invoke(this, e);
+            }
         }
 
         private void DonationCancel_Tapped(object sender, EventArgs e)
@@ -114,8 +122,11 @@ namespace GroupGift.Views.Popups
 
         private void DoDataChecks()
         {
-            IsValidName = !string.IsNullOrWhiteSpace(DonationName);
-            IsValidAmount = !string.IsNullOrWhiteSpace(eDonationAmount.Text);
+            if (_isDoDataChecks)
+            {
+                IsValidName = !string.IsNullOrWhiteSpace(DonationName);
+                IsValidAmount = !string.IsNullOrWhiteSpace(eDonationAmount.Text);
+            }
         }
 
     }
